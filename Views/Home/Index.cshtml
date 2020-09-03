@@ -1,0 +1,84 @@
+@model IEnumerable<DevExtremeMvcApp2.Models.GetIndexUebersicht_Result>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.GetIndexUebersicht_Result>()
+    .DataSource(ds => ds.WebApi()
+        .RouteName("GetIndexUebersicht_ResultApi")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Id")
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+        columns.AddFor(m => m.Id);
+
+        columns.AddFor(m => m.Kennzeichen);
+
+        columns.AddFor(m => m.Marke);
+
+        columns.AddFor(m => m.Modell);
+
+        columns.AddFor(m => m.Fahrzeughalter);
+
+        columns.AddFor(m => m.Niederlassung);
+
+        columns.AddFor(m => m.Kraftstoff);
+
+        columns.AddFor(m => m.Neuwagen);
+
+        columns.AddFor(m => m.Status);
+    })
+    .Editing(e => e
+        .AllowAdding(true)
+        .AllowUpdating(true)
+        .AllowDeleting(true)
+    )
+)
+@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.uebersicht_daten>()
+    .DataSource(ds => ds.WebApi()
+        .RouteName("uebersicht_datenApi")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Id")
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+        columns.AddFor(m => m.Id);
+
+        columns.AddFor(m => m.Kennzeichen);
+
+        columns.AddFor(m => m.Marke);
+
+        columns.AddFor(m => m.Modell);
+
+        columns.AddFor(m => m.Fahrzeughalter);
+
+        columns.AddFor(m => m.Niederlassung);
+
+        columns.AddFor(m => m.Kraftstoff);
+
+        columns.AddFor(m => m.Neuwagen);
+
+        columns.AddFor(m => m.Status);
+    })
+    .Editing(e => e
+        .AllowAdding(true)
+        .AllowUpdating(true)
+        .AllowDeleting(true)
+    )
+)
+
+

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FuhrparkContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="uebersicht_daten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kennzeichen" Type="nchar" MaxLength="10" />
+          <Property Name="Marke" Type="nchar" MaxLength="10" />
+          <Property Name="Modell" Type="nchar" MaxLength="10" />
+          <Property Name="Fahrzeughalter" Type="nchar" MaxLength="10" />
+          <Property Name="Niederlassung" Type="nchar" MaxLength="10" />
+          <Property Name="Kraftstoff" Type="nchar" MaxLength="10" />
+          <Property Name="Neuwagen" Type="bit" />
+          <Property Name="Status" Type="ntext" />
+        </EntityType>
+        <Function Name="GetIndexUebersicht" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="FuhrparkContextModelStoreContainer">
+          <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FuhrparkContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="uebersicht_daten">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kennzeichen" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Marke" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Modell" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fahrzeughalter" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Niederlassung" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Kraftstoff" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Neuwagen" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="FuhrparkContextEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" />
+          <FunctionImport Name="GetIndexUebersicht" ReturnType="Collection(FuhrparkContextModel.GetIndexUebersicht_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetIndexUebersicht_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Kennzeichen" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Marke" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Modell" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Fahrzeughalter" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Niederlassung" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Kraftstoff" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="Neuwagen" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FuhrparkContextModelStoreContainer" CdmEntityContainer="FuhrparkContextEntities">
+          <EntitySetMapping Name="uebersicht_daten">
+            <EntityTypeMapping TypeName="FuhrparkContextModel.uebersicht_daten">
+              <MappingFragment StoreEntitySet="uebersicht_daten">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kennzeichen" ColumnName="Kennzeichen" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Modell" ColumnName="Modell" />
+                <ScalarProperty Name="Fahrzeughalter" ColumnName="Fahrzeughalter" />
+                <ScalarProperty Name="Niederlassung" ColumnName="Niederlassung" />
+                <ScalarProperty Name="Kraftstoff" ColumnName="Kraftstoff" />
+                <ScalarProperty Name="Neuwagen" ColumnName="Neuwagen" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetIndexUebersicht" FunctionName="FuhrparkContextModel.Store.GetIndexUebersicht">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FuhrparkContextModel.GetIndexUebersicht_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kennzeichen" ColumnName="Kennzeichen" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Modell" ColumnName="Modell" />
+                <ScalarProperty Name="Fahrzeughalter" ColumnName="Fahrzeughalter" />
+                <ScalarProperty Name="Niederlassung" ColumnName="Niederlassung" />
+                <ScalarProperty Name="Kraftstoff" ColumnName="Kraftstoff" />
+                <ScalarProperty Name="Neuwagen" ColumnName="Neuwagen" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
