@@ -11,14 +11,14 @@ namespace DevExtremeMvcApp2 {
 
     public class MvcApplication : HttpApplication {
         protected void Application_Start() {
-            DevExpress.XtraReports.Web.QueryBuilder.Native.QueryBuilderBootstrapper.SessionState = System.Web.SessionState.SessionStateBehavior.Disabled;
+            
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
-            DevExpress.Web.Mvc.MVCxQueryBuilder.StaticInitialize();
+
         }
     }
 }

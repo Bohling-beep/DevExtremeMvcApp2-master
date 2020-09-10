@@ -1,3 +1,4 @@
+using DevExpress.Web.Mvc;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Mvc;
 using Newtonsoft.Json;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using DevExtremeMvcApp2.Models;
-using DevExpress.XtraRichEdit.Layout.Engine;
+
 
 namespace DevExtremeMvcApp2.Controllers
 {
@@ -24,34 +25,60 @@ namespace DevExtremeMvcApp2.Controllers
         private FuhrparkContextEntities _context = new FuhrparkContextEntities();
 
         [HttpGet]
-        public HttpResponseMessage Get(DataSourceLoadOptions loadOptions)
+        public async Task<HttpResponseMessage> Get(DataSourceLoadOptions loadOptions)
         {
-            var data = _context.Database.SqlQuery<GetIndexUebersicht_Result>("GetIndexUebersicht").ToList();
+            var view_uebersicht = _context.view_uebersicht.Select(i => new {
+                i.Id,
+                i.Kennzeichen,
+                i.Marke,
+                i.Modell,
+                i.Fahrzeughalter,
+                i.Niederlassung,
+                i.Kraftstoff,
+                i.Neuwagen,
+                i.Status,
+                i.EinkaufId,
+                i.ListenpreisB,
+                i.EKPreisB,
+                i.Erstzulassung,
+                i.KMDatum,
+                i.Kaufdatum,
+                i.KMStand
+            });
 
+            // If you work with a large amount of data, consider specifying the PaginateViaPrimaryKey and PrimaryKey properties.
+            // In this case, keys and data are loaded in separate queries. This can make the SQL execution plan more efficient.
+            // Refer to the topic https://github.com/DevExpress/DevExtreme.AspNet.Data/issues/336.
+            // loadOptions.PrimaryKey = new[] { "Id" };
+            // loadOptions.PaginateViaPrimaryKey = true;
 
-            return
-               Request.CreateResponse(data);
-
+            return Request.CreateResponse(await DataSourceLoader.LoadAsync(view_uebersicht, loadOptions));
         }
-    
+
 
         [HttpPost]
         public async Task<HttpResponseMessage> Post(FormDataCollection form) {
 
 
             var values = JsonConvert.DeserializeObject<IDictionary>(form.Get("values"));
-            var model = new uebersicht_daten();
-            var result = _context.uebersicht_daten.Add(model);
+            var model = new view_uebersicht();
+            var result = _context.view_uebersicht.Add(model);
             var jk = "kek";
-            string KENNZEICHEN = nameof(uebersicht_daten.Kennzeichen);
-            string MARKE = nameof(uebersicht_daten.Marke);
-            string MODELL = nameof(uebersicht_daten.Modell);
-            string FAHRZEUGHALTER = nameof(uebersicht_daten.Fahrzeughalter);
-            string NIEDERLASSUNG = nameof(uebersicht_daten.Niederlassung);
-            string KRAFTSTOFF = nameof(uebersicht_daten.Kraftstoff);
-            string NEUWAGEN = nameof(uebersicht_daten.Neuwagen);
-            string STATUS = nameof(uebersicht_daten.Status);
-      
+            string KENNZEICHEN = nameof(view_uebersicht.Kennzeichen);
+            string MARKE = nameof(view_uebersicht.Marke);
+            string MODELL = nameof(view_uebersicht.Modell);
+            string FAHRZEUGHALTER = nameof(view_uebersicht.Fahrzeughalter);
+            string NIEDERLASSUNG = nameof(view_uebersicht.Niederlassung);
+            string KRAFTSTOFF = nameof(view_uebersicht.Kraftstoff);
+            string NEUWAGEN = nameof(view_uebersicht.Neuwagen);
+            string STATUS = nameof(view_uebersicht.Status);
+            string LISTENPREIS_B = nameof(view_uebersicht.ListenpreisB);
+            string EKPREIS_B = nameof(view_uebersicht.EKPreisB);
+            string ERSTZULASSUNG = nameof(view_uebersicht.Erstzulassung);
+            string KMDATUM = nameof(view_uebersicht.KMDatum);
+            string KAUFDATUM = nameof(view_uebersicht.Kaufdatum);
+            string KMSTAND = nameof(view_uebersicht.KMStand);
+
 
 
 
@@ -64,8 +91,13 @@ namespace DevExtremeMvcApp2.Controllers
                 model.Kraftstoff = Convert.ToString(values[KRAFTSTOFF]),
                 model.Neuwagen = values[NEUWAGEN] != null ? Convert.ToBoolean(values[NEUWAGEN]) : (bool?)null,
                 model.Status = Convert.ToString(values[STATUS]),
-                jk,jk,jk,jk,jk,jk
-                
+                model.Erstzulassung = Convert.ToString(values[ERSTZULASSUNG]),
+                model.KMDatum = Convert.ToString(values[KMDATUM]),
+                model.Kaufdatum = Convert.ToString(values[KAUFDATUM]),
+                model.KMStand = Convert.ToString(values[KMSTAND]),
+                model.ListenpreisB = Convert.ToString(values[LISTENPREIS_B]),
+                model.EKPreisB = Convert.ToString(values[EKPREIS_B])
+
                 );
       
                     
@@ -176,5 +208,7 @@ namespace DevExtremeMvcApp2.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }

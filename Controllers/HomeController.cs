@@ -1,4 +1,4 @@
-using DevExpress.DataAccess.Wizard.Model;
+
 using DevExtremeMvcApp2.Models;
 
 using Microsoft.Ajax.Utilities;
@@ -29,7 +29,25 @@ namespace DevExtremeMvcApp2.Controllers {
 
             return View();
         }
+        public ActionResult about()
 
+        {
+
+            return View();
+        }
+        public ActionResult GanttPartial()
+        {
+            return PartialView("~/Views/Home/_GanttPartial.cshtml");
+        }
+        public ActionResult GanttBatchUpdate(
+                            )
+        {
+
+
+
+
+            return PartialView("~/Views/Home/_GanttPartial.cshtml");
+        }
 
 
     }

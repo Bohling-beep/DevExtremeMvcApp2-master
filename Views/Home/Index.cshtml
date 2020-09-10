@@ -3,54 +3,62 @@
 @{ ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<h2>Index</h2>
+<h2>Übersicht</h2>
+
+
+@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.view_uebersicht>()
+         .Editing(e => e.Mode(GridEditMode.Popup)
+       .AllowAdding(true)
+       .AllowDeleting(true)
+       .AllowUpdating(true)
+       .Popup(p => p
+               .Title("Edit")
+               .Width("100%")
+               .Height("100%")
+               .Position(pos => pos
+                   //.My(HorizontalAlignment.Center, VerticalAlignment.Center)
+                   //.At(HorizontalAlignment.Center, VerticalAlignment.Center)
+                   .Of(new JS("window"))
+                   )
+           )
+
+           .Form(f => f.Items(items =>
+           {
+               items.AddGroup()
+                   .Caption("Zuordnung")
+                   .ColCount(3)
+                   .ColSpan(3)
+                   .Items(groupItems =>
+                   {
+                       groupItems.AddSimpleFor(m => m.Kennzeichen);
+                       groupItems.AddSimpleFor(m => m.Marke);
+                       groupItems.AddSimpleFor(m => m.Modell);
+                       groupItems.AddSimpleFor(m => m.Kraftstoff);
+                       groupItems.AddSimpleFor(m => m.Neuwagen);
+                       groupItems.AddSimpleFor(m => m.Status);
+                   });
+
+               items.AddGroup()
+                  .Caption("Fahrzeug Einkauf")
+                  .ColCount(2)
+                  .ColSpan(5)
+                  .Items(groupItems =>
+                  {
+                      groupItems.AddSimpleFor(m => m.ListenpreisB);
+                      groupItems.AddSimpleFor(m => m.EKPreisB);
+                      groupItems.AddSimpleFor(m => m.Erstzulassung);
+                      groupItems.AddSimpleFor(m => m.Kaufdatum);
+                      groupItems.AddSimpleFor(m => m.KMDatum);
+                      groupItems.AddSimpleFor(m => m.KMStand);
+                  });
 
 
 
 
-@(Html.DevExtreme()
-    .DataGrid<DevExtremeMvcApp2.Models.uebersicht_daten>()
-    .Editing (e => e.Mode(GridEditMode.Popup)
-        .AllowAdding(true)
-        .AllowDeleting(true)
-        .AllowUpdating(true)
-        .Popup(p => p
-                .Title("Edit")
-                .Width("100%")
-                .Height("100%")
-                .Position(pos => pos
-                    //.My(HorizontalAlignment.Center, VerticalAlignment.Center)
-                    //.At(HorizontalAlignment.Center, VerticalAlignment.Center)
-                    .Of(new JS("window"))
-                    )
-            )
-
-            .Form(f => f.Items(items =>
-            {
-                items.AddGroup()
-                    .Caption("Zuordnung")
-                    .ColCount(3)
-                    .ColSpan(3)
-                    .Items(groupItems =>
-                    {
-                        groupItems.AddSimpleFor(m => m.Kennzeichen);
-                        groupItems.AddSimpleFor(m => m.Marke);
-                        groupItems.AddSimpleFor(m => m.Modell);
-                        groupItems.AddSimpleFor(m => m.Kraftstoff);
-                        groupItems.AddSimpleFor(m => m.Neuwagen);
-                        groupItems.AddSimpleFor(m => m.Status);
-                    });
 
 
-
-
-
-
-            }))
+           }))
     )
-
-
-
     .DataSource(ds => ds.WebApi()
         .RouteName("uebersicht_datenneuApi")
         .LoadAction("Get")
@@ -58,80 +66,53 @@
         .UpdateAction("Put")
         .DeleteAction("Delete")
         .Key("Id")
-
     )
     .RemoteOperations(true)
     .Columns(columns => {
 
-        columns.AddFor(m => m.Id);
+        columns.AddFor(m => m.Id)
+        .Width(50);
 
-        columns.AddFor(m => m.Kennzeichen);
+        columns.AddFor(m => m.Kennzeichen)
+        .Width(100);
 
         columns.AddFor(m => m.Marke);
 
         columns.AddFor(m => m.Modell);
 
-        columns.AddFor(m => m.Fahrzeughalter);
+        columns.AddFor(m => m.Fahrzeughalter)
+        .Width(120);
 
-        columns.AddFor(m => m.Niederlassung);
+        columns.AddFor(m => m.Niederlassung)
+        .Width(120);
 
-        columns.AddFor(m => m.Kraftstoff);
-
-        columns.AddFor(m => m.Neuwagen);
-
-
-
-    })
-
-   )
-
-@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.view_uebersicht>()
-    .DataSource(ds => ds.WebApi()
-        .RouteName("view_uebersichtApi")
-        .LoadAction("Get")
-        .InsertAction("Post")
-        .UpdateAction("Put")
-        .DeleteAction("Delete")
-        .Key("Id")
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
-
-        columns.AddFor(m => m.Id);
-
-        columns.AddFor(m => m.Kennzeichen);
-
-        columns.AddFor(m => m.Marke);
-
-        columns.AddFor(m => m.Modell);
-
-        columns.AddFor(m => m.Fahrzeughalter);
-
-        columns.AddFor(m => m.Niederlassung);
-
-        columns.AddFor(m => m.Kraftstoff);
+        columns.AddFor(m => m.Kraftstoff)
+        .Width(80);
 
         columns.AddFor(m => m.Neuwagen);
 
         columns.AddFor(m => m.Status);
 
-        columns.AddFor(m => m.EinkaufId);
+        columns.AddFor(m => m.EinkaufId)
+        .Visible(false);
 
-        columns.AddFor(m => m.ListenpreisB);
+        columns.AddFor(m => m.ListenpreisB)
+        .Width(100);
 
-        columns.AddFor(m => m.EKPreisB);
+        columns.AddFor(m => m.EKPreisB)
+        .Width(80);
 
-        columns.AddFor(m => m.Erstzulassung);
+        columns.AddFor(m => m.Erstzulassung)
+        .Width(100);
 
-        columns.AddFor(m => m.KMDatum);
+        columns.AddFor(m => m.KMDatum)
+        .Width(80);
 
-        columns.AddFor(m => m.Kaufdatum);
+        columns.AddFor(m => m.Kaufdatum)
+        .Width(100);
 
-        columns.AddFor(m => m.KMStand);
+        columns.AddFor(m => m.KMStand)
+        .Width(80);
     })
-    .Editing(e => e
-        .AllowAdding(true)
-        .AllowUpdating(true)
-        .AllowDeleting(true)
+
     )
-)

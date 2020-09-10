@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Termine</h2>
+
+@(Html.DevExtreme().Form<DevExtremeMvcApp2.Models.view_uebersicht>()
+    .Items(items => {
+        items.AddGroup().Caption("Group1").Items(groupItems => {
+
+            groupItems.AddSimpleFor(m => m.Id);
+
+            groupItems.AddSimpleFor(m => m.Kennzeichen);
+
+            groupItems.AddSimpleFor(m => m.Marke);
+
+            groupItems.AddSimpleFor(m => m.Modell);
+
+            groupItems.AddSimpleFor(m => m.Fahrzeughalter);
+
+            groupItems.AddSimpleFor(m => m.Niederlassung);
+
+            groupItems.AddSimpleFor(m => m.Kraftstoff);
+
+            groupItems.AddSimpleFor(m => m.Neuwagen);
+
+            groupItems.AddSimpleFor(m => m.Status);
+
+            groupItems.AddSimpleFor(m => m.EinkaufId);
+
+            groupItems.AddSimpleFor(m => m.ListenpreisB);
+
+            groupItems.AddSimpleFor(m => m.EKPreisB);
+
+            groupItems.AddSimpleFor(m => m.Erstzulassung);
+
+            groupItems.AddSimpleFor(m => m.KMDatum);
+
+            groupItems.AddSimpleFor(m => m.Kaufdatum);
+
+            groupItems.AddSimpleFor(m => m.KMStand);
+        });
+    })
+)
+
+
+
