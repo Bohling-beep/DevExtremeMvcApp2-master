@@ -1,7 +1,7 @@
 /*!
 * DevExtreme (dx.messages.ja.js)
-* Version: 20.1.4
-* Build date: Tue Jun 02 2020
+* Version: 20.1.7
+* Build date: Tue Aug 25 2020
 *
 * Copyright (c) 2012 - 2020 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
@@ -307,6 +307,7 @@
             "dxFileManager-commandThumbnails": "\u7e2e\u5c0f\u8868\u793a",
             "dxFileManager-commandDetails": "\u8a73\u7d30\u8868\u793a",
             "dxFileManager-commandClearSelection": "\u9078\u629e\u306e\u30af\u30ea\u30a2",
+            "dxFileManager-commandShowNavPane": "TODO",
             "dxFileManager-dialogDirectoryChooserMoveTitle": "\u79fb\u52d5\u5148",
             "dxFileManager-dialogDirectoryChooserMoveButtonText": "\u79fb\u52d5",
             "dxFileManager-dialogDirectoryChooserCopyTitle": "\u30b3\u30d4\u30fc\u5148",

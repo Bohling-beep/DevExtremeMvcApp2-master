@@ -17,8 +17,8 @@ namespace DevExtremeMvcApp2.Controllers {
         public ActionResult Index()
         {
 
-            var data = context.Database.SqlQuery<GetIndexUebersicht_Result>("GetIndexUebersicht").ToList();
-            return View();
+          
+           return View();
 
         }
 
@@ -26,21 +26,7 @@ namespace DevExtremeMvcApp2.Controllers {
         public ActionResult Create()
 
         {
-            SqlParameter[] param = new SqlParameter[]
-            {
-                
-                new SqlParameter("@Kennzeichen",20),
-                new SqlParameter("@Marke",20),
-                new SqlParameter("@Modell",20),
-                new SqlParameter("@Fahrzeughalter",20),
-                new SqlParameter("@Niederlassung",20),
-                new SqlParameter("@Kraftstoff",20),
-                new SqlParameter("@Neuwagen",20),
-                new SqlParameter("@Status",20),
-           
 
-            };
-            var insert = context.Database.SqlQuery<GetIndexUebersicht_Result>("InsertIntoIndexUebersicht");
             return View();
         }
 

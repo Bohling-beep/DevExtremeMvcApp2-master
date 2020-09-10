@@ -1,7 +1,7 @@
 /**
 * DevExtreme (dx.ios7.default.css)
-* Version: 20.1.4
-* Build date: Tue Jun 02 2020
+* Version: 20.1.7
+* Build date: Tue Aug 25 2020
 *
 * Copyright (c) 2012 - 2020 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
@@ -7613,13 +7613,17 @@
 .dx-fileuploader-invalid .dx-fileuploader-file-status-message {
   color: #ff392c;
 }
+.dx-scheduler-overlay-panel .dx-overlay-content {
+  position: relative;
+  background: #fff;
+}
 .dx-popup-wrapper.dx-scheduler-appointment-tooltip-wrapper .dx-overlay-content,
-.dx-scheduler .dx-scheduler-overlay-panel .dx-overlay-content {
+.dx-scheduler-overlay-panel .dx-overlay-content {
   -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.15);
   box-shadow: 0 0 15px 0 rgba(0,0,0,.15);
 }
 .dx-popup-wrapper.dx-scheduler-appointment-tooltip-wrapper .dx-tooltip-appointment-item-marker-body,
-.dx-scheduler .dx-scheduler-overlay-panel .dx-tooltip-appointment-item-marker-body {
+.dx-scheduler-overlay-panel .dx-tooltip-appointment-item-marker-body {
   background: #65bccd;
 }
 .dx-scheduler-win-no-touch .dx-scheduler-appointment {
@@ -9710,12 +9714,9 @@
   width: 100%;
   height: 0;
 }
-.dx-scheduler-small .dx-scheduler-agenda .dx-scheduler-scrollable-appointments {
-  padding-left: 35px;
-}
 .dx-scheduler-small .dx-scheduler-agenda .dx-scheduler-scrollable-appointments.dx-rtl {
   padding-left: 0;
-  padding-right: 35px;
+  padding-right: 70px;
 }
 .dx-scheduler-agenda .dx-scheduler-time-panel-cell {
   vertical-align: top;
@@ -9869,7 +9870,6 @@
   opacity: 1;
   font-weight: 700;
   font-size: 13px;
-  margin-top: 4px;
 }
 .dx-scheduler-agenda .dx-scheduler-appointment-content-allday {
   display: inline-block;
@@ -9940,7 +9940,14 @@
   margin-left: 0!important;
 }
 .dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-group-header-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   height: 40px;
+}
+.dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-group-header-content > div {
+  margin: auto;
 }
 .dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-group-row,
 .dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-header-panel,

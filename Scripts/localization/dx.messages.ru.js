@@ -1,7 +1,7 @@
 /*!
 * DevExtreme (dx.messages.ru.js)
-* Version: 20.1.4
-* Build date: Tue Jun 02 2020
+* Version: 20.1.7
+* Build date: Tue Aug 25 2020
 *
 * Copyright (c) 2012 - 2020 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
@@ -308,6 +308,7 @@
             "dxFileManager-commandDetails": "\u0420\u0435\u0436\u0438\u043c \u0441\u043f\u0438\u0441\u043a\u0430",
             "dxFileManager-commandClearSelection": "\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c \u0432\u044b\u0434\u0435\u043b\u0435\u043d\u0438\u0435",
             "dxFileManager-dialogButtonCancel": "\u041e\u0442\u043c\u0435\u043d\u0430",
+            "dxFileManager-commandShowNavPane": "\u041f\u0435\u0440\u0435\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u043f\u0430\u043d\u0435\u043b\u044c \u043d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438",
             "dxFileManager-dialogDirectoryChooserMoveTitle": "\u041f\u0435\u0440\u0435\u043c\u0435\u0441\u0442\u0438\u0442\u044c \u0432",
             "dxFileManager-dialogDirectoryChooserMoveButtonText": "\u041f\u0435\u0440\u0435\u043c\u0435\u0441\u0442\u0438\u0442\u044c",
             "dxFileManager-dialogDirectoryChooserCopyTitle": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432",

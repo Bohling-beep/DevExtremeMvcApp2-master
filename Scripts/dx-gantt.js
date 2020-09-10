@@ -1,7 +1,7 @@
 /*!
  * DevExpress Gantt (dx-gantt)
- * Version: 1.0.3
- * Build date: Fri May 22 2020
+ * Version: 1.0.7
+ * Build date: Fri Jun 26 2020
  * 
  * Copyright (c) 2012 - 2020 Developer Express Inc. ALL RIGHTS RESERVED
  * Read about DevExpress licensing here: https://www.devexpress.com/Support/EULAs
@@ -2869,17 +2869,19 @@ var GridLayoutCalculator = (function () {
         return result;
     };
     GridLayoutCalculator.prototype.getElementsInRenderedTiles = function (map, isVerticalTile, scrollPos) {
-        var visibleAreaSizeValue = isVerticalTile ? this.visibleTaskAreaSize.height : this.visibleTaskAreaSize.width;
-        var firstVisibleTileIndex = Math.floor(scrollPos / (visibleAreaSizeValue * 2));
-        var lastVisibleTileIndex = Math.floor((scrollPos + visibleAreaSizeValue) / (visibleAreaSizeValue * 2));
         var result = new Array();
-        for (var i = firstVisibleTileIndex; i <= lastVisibleTileIndex; i++) {
-            if (!map[i])
-                continue;
-            map[i].forEach(function (info) {
-                if (result.indexOf(info) == -1)
-                    result.push(info);
-            });
+        var visibleAreaSizeValue = isVerticalTile ? this.visibleTaskAreaSize.height : this.visibleTaskAreaSize.width;
+        if (visibleAreaSizeValue > 0) {
+            var firstVisibleTileIndex = Math.floor(scrollPos / (visibleAreaSizeValue * 2));
+            var lastVisibleTileIndex = Math.floor((scrollPos + visibleAreaSizeValue) / (visibleAreaSizeValue * 2));
+            for (var i = firstVisibleTileIndex; i <= lastVisibleTileIndex; i++) {
+                if (!map[i])
+                    continue;
+                map[i].forEach(function (info) {
+                    if (result.indexOf(info) == -1)
+                        result.push(info);
+                });
+            }
         }
         return result;
     };
@@ -3866,7 +3868,8 @@ var DateUtils = (function () {
         }
         return currentTickTime + tickTimeSpan;
     };
-    DateUtils.adjustStartDateByViewType = function (date, viewType) {
+    DateUtils.adjustStartDateByViewType = function (date, viewType, firstDayOfWeek) {
+        if (firstDayOfWeek === void 0) { firstDayOfWeek = 0; }
         switch (viewType) {
             case Enums_1.ViewType.TenMinutes:
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
@@ -3875,7 +3878,7 @@ var DateUtils = (function () {
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate());
             case Enums_1.ViewType.Days:
             case Enums_1.ViewType.Weeks:
-                return new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + firstDayOfWeek);
             case Enums_1.ViewType.Months:
             case Enums_1.ViewType.Quarter:
             case Enums_1.ViewType.Years:
@@ -3884,7 +3887,8 @@ var DateUtils = (function () {
                 return new Date();
         }
     };
-    DateUtils.adjustEndDateByViewType = function (date, viewType) {
+    DateUtils.adjustEndDateByViewType = function (date, viewType, firstDayOfWeek) {
+        if (firstDayOfWeek === void 0) { firstDayOfWeek = 0; }
         switch (viewType) {
             case Enums_1.ViewType.TenMinutes:
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1);
@@ -3893,7 +3897,7 @@ var DateUtils = (function () {
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
             case Enums_1.ViewType.Days:
             case Enums_1.ViewType.Weeks:
-                return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7 - date.getDay());
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7 - date.getDay() + firstDayOfWeek);
             case Enums_1.ViewType.Months:
             case Enums_1.ViewType.Quarter:
             case Enums_1.ViewType.Years:
@@ -4299,6 +4303,7 @@ var Settings = (function () {
         this.areVerticalBordersEnabled = true;
         this.areAlternateRowsEnabled = true;
         this.allowSelectTask = true;
+        this.firstDayOfWeek = 0;
         this.editing = new EditingSettings();
         this.validation = new ValidationSettings();
         this.stripLines = new StripLineSettings();
@@ -4320,6 +4325,8 @@ var Settings = (function () {
                 result.areAlternateRowsEnabled = settings.areAlternateRowsEnabled;
             if (Utils_1.JsonUtils.isExists(settings.allowSelectTask))
                 result.allowSelectTask = settings.allowSelectTask;
+            if (Utils_1.JsonUtils.isExists(settings.firstDayOfWeek))
+                result.firstDayOfWeek = settings.firstDayOfWeek;
             if (Utils_1.JsonUtils.isExists(settings.editing))
                 result.editing = EditingSettings.parse(settings.editing);
             if (Utils_1.JsonUtils.isExists(settings.validation))
@@ -4546,12 +4553,12 @@ var TaskEditController = (function () {
             this.updateWrapInfo();
             this.wrapInfo.assignPosition(this.baseElement);
             this.wrapInfo.assignSize(this.baseElement);
-            this.baseElement.className = TaskEditController.CLASSNAMES.TASK_EDIT_BOX;
-            if (this.task.isMilestone())
-                this.baseElement.className = this.baseElement.className + " milestone";
             this.gantt.taskArea.appendChild(this.baseElement);
+            this.baseElement.className = TaskEditController.CLASSNAMES.TASK_EDIT_BOX;
             if (!this.gantt.settings.editing.enabled || !this.gantt.settings.editing.allowDependencyInsert)
                 this.baseElement.className = this.baseElement.className + " hide-dependency";
+            if (this.task.isMilestone())
+                this.baseElement.className = this.baseElement.className + " milestone";
             else {
                 if (!this.gantt.settings.editing.enabled || !this.gantt.settings.editing.allowTaskUpdate || !this.canUpdateTask())
                     this.baseElement.className = this.baseElement.className + " hide-updating";
@@ -5277,9 +5284,9 @@ var GanttView = (function () {
     };
     GanttView.prototype.getDateRange = function (modelStartDate, modelEndDate) {
         var start = new Date(modelStartDate.getTime() - this.getVisibleAreaTime());
-        start = Utils_1.DateUtils.adjustStartDateByViewType(start, this.settings.viewType);
+        start = Utils_1.DateUtils.adjustStartDateByViewType(start, this.settings.viewType, this.settings.firstDayOfWeek);
         var end = new Date(modelEndDate.getTime() + this.getVisibleAreaTime());
-        end = Utils_1.DateUtils.adjustEndDateByViewType(end, this.settings.viewType);
+        end = Utils_1.DateUtils.adjustEndDateByViewType(end, this.settings.viewType, this.settings.firstDayOfWeek);
         return new DateRange_1.DateRange(start, end);
     };
     GanttView.prototype.getVisibleAreaTime = function () {
@@ -5825,6 +5832,12 @@ var GanttView = (function () {
             this.resetAndUpdate();
         }
     };
+    GanttView.prototype.setFirstDayOfWeek = function (firstDayOfWeek) {
+        if (this.settings.firstDayOfWeek !== firstDayOfWeek) {
+            this.settings.firstDayOfWeek = firstDayOfWeek;
+            this.resetAndUpdate();
+        }
+    };
     GanttView.prototype.loadOptionsFromGanttOwner = function () {
         this.tickSize.height = this.ganttOwner.getRowHeight();
         var tasksData = this.ganttOwner.getGanttTasksData();
@@ -6073,8 +6086,27 @@ var ViewVisualModel = (function () {
         if (recalculateParentRequired)
             this.owner.dispatcher.notifyParentDataRecalculated(this.getCurrentTaskData());
     };
-    ViewVisualModel.prototype.getCurrentTaskData = function () { return this.tasks.items; };
+    ViewVisualModel.prototype.getCurrentTaskData = function () {
+        var _this = this;
+        return this.tasks.items.map(function (t) { return _this.getTaskObjectForDataSource(t); });
+    };
     ;
+    ViewVisualModel.prototype.getTaskObjectForDataSource = function (task) {
+        var parentTask = task.parentId && this.tasks.getItemById(task.parentId);
+        return {
+            id: task.id,
+            start: task.start,
+            end: task.end,
+            duration: task.duration,
+            description: task.description,
+            parentId: parentTask && parentTask.id,
+            progress: task.progress,
+            taskType: task.taskType,
+            title: task.title,
+            customFields: task.customFields,
+            expanded: task.expanded
+        };
+    };
     ViewVisualModel.prototype.populateItemsForView = function () {
         this._viewItemList.splice(0, this._viewItemList.length);
         this.populateVisibleItems(this.root);
@@ -7382,19 +7414,7 @@ var TaskManipulator = (function (_super) {
         return task;
     };
     TaskManipulator.prototype.getObjectForDataSource = function (task) {
-        return {
-            id: task.id,
-            start: task.start,
-            end: task.end,
-            duration: task.duration,
-            description: task.description,
-            parentId: task.parentId ? this.viewModel.tasks.getItemById(task.parentId).id : null,
-            progress: task.progress,
-            taskType: task.taskType,
-            title: task.title,
-            customFields: task.customFields,
-            expanded: task.expanded
-        };
+        return this.viewModel.getTaskObjectForDataSource(task);
     };
     return TaskManipulator;
 }(TaskPropertiesManipulator_1.BaseManipulator));
@@ -9279,6 +9299,9 @@ var RemoveDependencyCommand = (function (_super) {
             var dependency = this.control.viewModel.dependencies.items.filter(function (d) { return d.internalId == id; })[0];
             if (dependency) {
                 this.history.addAndRedo(new TaskDependencyHistoryItem_1.RemoveDependencyHistoryItem(this.modelManipulator, id));
+                if (id === this.control.taskEditController.dependencyId)
+                    this.control.taskEditController.selectDependency(null);
+                this.control.barManager.updateItemsState([]);
                 return true;
             }
         }
@@ -9455,8 +9478,8 @@ var TaskEditDialogCommand = (function (_super) {
         for (var i = 0; i < oldParameters.assigned.length; i++) {
             _loop_1(i);
         }
-        var updateParens = newParameters.start != oldParameters.start || newParameters.end != oldParameters.end || newParameters.progress != oldParameters.progress;
-        if (updateParens)
+        var updateParents = newParameters.start != oldParameters.start || newParameters.end != oldParameters.end || newParameters.progress != oldParameters.progress || newParameters.title != oldParameters.title;
+        if (updateParents)
             this.validationController.updateParentsIfRequired(oldParameters.id);
         this.history.endTransaction();
         return false;

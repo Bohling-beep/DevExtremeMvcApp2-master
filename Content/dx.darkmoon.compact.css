@@ -1,7 +1,7 @@
 /**
 * DevExtreme (dx.darkmoon.compact.css)
-* Version: 20.1.4
-* Build date: Tue Jun 02 2020
+* Version: 20.1.7
+* Build date: Tue Aug 25 2020
 *
 * Copyright (c) 2012 - 2020 Developer Express Inc. ALL RIGHTS RESERVED
 * Read about DevExtreme licensing here: https://js.devexpress.com/Licensing/
@@ -4268,21 +4268,21 @@
 }
 .dx-datebox-wrapper-calendar .dx-popup-content {
   padding: 0;
+  margin: 0 7.5px;
 }
 .dx-datebox-wrapper-calendar .dx-calendar {
   border: none;
-  margin: 15px;
+  margin: 15px 7.5px;
 }
 .dx-datebox-wrapper-calendar .dx-datebox-container-cell {
   margin-right: 15px;
   margin-bottom: 15px;
 }
 .dx-datebox-wrapper-calendar.dx-datebox-wrapper-datetime .dx-calendar {
-  margin-right: 7.5px;
   margin-bottom: 7.5px;
 }
 .dx-datebox-wrapper-calendar.dx-datebox-wrapper-datetime .dx-timeview {
-  margin: 15px 15px 7.5px 7.5px;
+  margin: 15px 7.5px 7.5px;
 }
 .dx-datebox-adaptivity-mode.dx-datebox-wrapper-calendar.dx-datebox-wrapper-datetime .dx-timeview {
   margin: 0 7.5px 7.5px;
@@ -4299,14 +4299,6 @@
 .dx-rtl .dx-datebox-wrapper .dx-popup-bottom .dx-toolbar-button + .dx-toolbar-button .dx-button {
   margin-right: 5px;
   margin-left: 0;
-}
-.dx-rtl .dx-datebox-wrapper-calendar.dx-datebox-wrapper-datetime .dx-calendar {
-  margin-left: 7.5px;
-  margin-right: 15px;
-}
-.dx-rtl .dx-datebox-wrapper-calendar.dx-datebox-wrapper-datetime .dx-timeview {
-  margin-right: 7.5px;
-  margin-left: 15px;
 }
 .dx-datebox-list .dx-dropdowneditor-icon {
   font: 14px/14px DXIcons;
@@ -9526,13 +9518,17 @@
 .dx-fileuploader-invalid .dx-fileuploader-file-status-message {
   color: #f9517e;
 }
+.dx-scheduler-overlay-panel .dx-overlay-content {
+  position: relative;
+  background: #fff;
+}
 .dx-popup-wrapper.dx-scheduler-appointment-tooltip-wrapper .dx-overlay-content,
-.dx-scheduler .dx-scheduler-overlay-panel .dx-overlay-content {
+.dx-scheduler-overlay-panel .dx-overlay-content {
   -webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,.15);
   box-shadow: 0 0 15px 0 rgba(0,0,0,.15);
 }
 .dx-popup-wrapper.dx-scheduler-appointment-tooltip-wrapper .dx-tooltip-appointment-item-marker-body,
-.dx-scheduler .dx-scheduler-overlay-panel .dx-tooltip-appointment-item-marker-body {
+.dx-scheduler-overlay-panel .dx-tooltip-appointment-item-marker-body {
   background: #2cc9b4;
 }
 .dx-scheduler-win-no-touch .dx-scheduler-appointment {
@@ -11346,12 +11342,9 @@
   width: 100%;
   height: 0;
 }
-.dx-scheduler-small .dx-scheduler-agenda .dx-scheduler-scrollable-appointments {
-  padding-left: 35px;
-}
 .dx-scheduler-small .dx-scheduler-agenda .dx-scheduler-scrollable-appointments.dx-rtl {
   padding-left: 0;
-  padding-right: 35px;
+  padding-right: 70px;
 }
 .dx-scheduler-agenda .dx-scheduler-time-panel-cell:after {
   display: none;
@@ -11418,7 +11411,6 @@
   opacity: 1;
   font-weight: 700;
   font-size: 13px;
-  margin-top: 4px;
 }
 .dx-scheduler-agenda .dx-scheduler-appointment-content-allday {
   display: inline-block;
@@ -11488,7 +11480,14 @@
   margin-left: 0!important;
 }
 .dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-group-header-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   height: 40px;
+}
+.dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-group-header-content > div {
+  margin: auto;
 }
 .dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-group-row,
 .dx-scheduler-work-space-horizontal-grouped.dx-scheduler-timeline .dx-scheduler-header-panel,
@@ -14000,6 +13999,12 @@
 .dx-gantt .dx-gantt-toolbar-wrapper .dx-gantt-toolbar-separator {
   border-left-color: #596980;
 }
+.dx-gantt .dx-treelist-text-content {
+  min-height: 16px;
+}
+.dx-gantt .dx-treelist-icon-container {
+  max-height: 16px;
+}
 .dx-gantt .dx-treelist .dx-treelist-rowsview .dx-selection.dx-row > td,
 .dx-gantt .dx-treelist .dx-treelist-rowsview .dx-selection.dx-row > tr > td,
 .dx-gantt .dx-treelist .dx-treelist-rowsview .dx-selection.dx-row:hover > td,
@@ -14084,6 +14089,9 @@
   height: 16px;
   line-height: 16px;
   background-color: #f9517e;
+  border-left-color: #f9517e;
+  border-right-color: #f9517e;
+  border-top-color: #f9517e;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -14106,10 +14114,6 @@
   border-right-color: transparent;
   border-bottom-color: transparent;
 }
-.dx-gantt .dx-gantt-taskWrapper .dx-gantt-task.dx-gantt-parent::before {
-  border-left-color: #f9517e;
-  border-top-color: #f9517e;
-}
 .dx-gantt .dx-gantt-taskWrapper .dx-gantt-task.dx-gantt-parent:not(.dx-gantt-noPrg) .dx-gantt-tPrg::before {
   border-left-color: rgba(255,255,255,.2);
   border-top-color: rgba(255,255,255,.2);
@@ -14119,10 +14123,6 @@
   right: 0;
   border-left-color: transparent;
   border-bottom-color: transparent;
-}
-.dx-gantt .dx-gantt-taskWrapper .dx-gantt-task.dx-gantt-parent::after {
-  border-right-color: #f9517e;
-  border-top-color: #f9517e;
 }
 .dx-gantt .dx-gantt-taskWrapper .dx-gantt-task.dx-gantt-parent.dx-gantt-cmpl::after {
   border-right-color: rgba(255,255,255,.2);
@@ -14233,6 +14233,12 @@
 .dx-gantt .dx-gantt-altRow,
 .dx-gantt .dx-gantt-collapsable-row {
   background-color: #4e607f;
+}
+.dx-form.dx-cv-dialog {
+  padding-bottom: 10px;
+}
+.dx-form.dx-cv-dialog .dx-cv-dialog-row {
+  padding-top: 10px;
 }
 .dx-gantt-i.dx-gantt-i-add {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20version%3D%221.1%22%20id%3D%22_x31_%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%2018%2018%22%20style%3D%22enable-background%3Anew%200%200%2018%2018%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%09.st0%7Bfill-rule%3Aevenodd%3Bclip-rule%3Aevenodd%3B%7D%0A%3C%2Fstyle%3E%0A%3Cpath%20id%3D%22_x32_%22%20class%3D%22st0%22%20d%3D%22M17%2C15h-3v3h-2v-3H9v-2h3v-3h2v3h3V15z%20M12%2C4l-2-2H3v12h4v2H1V0h10l3%2C3v5h-2V4z%22%20fill%3D%22%23cccccc%22%2F%3E%0A%3C%2Fsvg%3E%0A");

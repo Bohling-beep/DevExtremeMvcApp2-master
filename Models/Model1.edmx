@@ -4,7 +4,33 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FuhrparkContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FuhrparkContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Fahrzeugeinkauf">
+          <Key>
+            <PropertyRef Name="EinkaufId" />
+          </Key>
+          <Property Name="EinkaufId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ListenpreisB" Type="char" MaxLength="10" />
+          <Property Name="EKPreisB" Type="char" MaxLength="10" />
+          <Property Name="Erstzulassung" Type="char" MaxLength="10" />
+          <Property Name="KMDatum" Type="char" MaxLength="10" />
+          <Property Name="Kaufdatum" Type="char" MaxLength="10" />
+          <Property Name="KMStand" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Kraftstoff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Kraftstoff" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Status" Type="ntext" />
+        </EntityType>
         <EntityType Name="uebersicht_daten">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,12 +45,73 @@
           <Property Name="Neuwagen" Type="bit" />
           <Property Name="Status" Type="ntext" />
         </EntityType>
+        <!--Während der Generierung sind Fehler aufgetreten:
+Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
+        <EntityType Name="view_uebersicht">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Kennzeichen" Type="nchar" MaxLength="10" />
+          <Property Name="Marke" Type="nchar" MaxLength="10" />
+          <Property Name="Modell" Type="nchar" MaxLength="10" />
+          <Property Name="Fahrzeughalter" Type="nchar" MaxLength="10" />
+          <Property Name="Niederlassung" Type="nchar" MaxLength="10" />
+          <Property Name="Kraftstoff" Type="nchar" MaxLength="10" />
+          <Property Name="Neuwagen" Type="bit" />
+          <Property Name="Status" Type="ntext" />
+          <Property Name="EinkaufId" Type="int" />
+          <Property Name="ListenpreisB" Type="char" MaxLength="10" />
+          <Property Name="EKPreisB" Type="char" MaxLength="10" />
+          <Property Name="Erstzulassung" Type="char" MaxLength="10" />
+          <Property Name="KMDatum" Type="char" MaxLength="10" />
+          <Property Name="Kaufdatum" Type="char" MaxLength="10" />
+          <Property Name="KMStand" Type="char" MaxLength="10" />
+        </EntityType>
         <Function Name="GetIndexUebersicht" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertIndexUebersicht" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Kennzeichen" Type="char" Mode="In" />
+          <Parameter Name="Marke" Type="char" Mode="In" />
+          <Parameter Name="Modell" Type="char" Mode="In" />
+          <Parameter Name="Fahrzeughalter" Type="char" Mode="In" />
+          <Parameter Name="Niederlassung" Type="char" Mode="In" />
+          <Parameter Name="Kraftstoff" Type="char" Mode="In" />
+          <Parameter Name="Neuwagen" Type="bit" Mode="In" />
+          <Parameter Name="Status" Type="char" Mode="In" />
+          <Parameter Name="Erstzulassung" Type="char" Mode="In" />
+          <Parameter Name="KMDatum" Type="char" Mode="In" />
+          <Parameter Name="Kaufdatum" Type="char" Mode="In" />
+          <Parameter Name="KMStand" Type="char" Mode="In" />
+          <Parameter Name="ListenpreisB" Type="char" Mode="In" />
+          <Parameter Name="EKPreisB" Type="char" Mode="In" />
+        </Function>
         <EntityContainer Name="FuhrparkContextModelStoreContainer">
+          <EntitySet Name="Fahrzeugeinkauf" EntityType="Self.Fahrzeugeinkauf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kraftstoff" EntityType="Self.Kraftstoff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_uebersicht" EntityType="Self.view_uebersicht" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_uebersicht].[Id] AS [Id], 
+    [view_uebersicht].[Kennzeichen] AS [Kennzeichen], 
+    [view_uebersicht].[Marke] AS [Marke], 
+    [view_uebersicht].[Modell] AS [Modell], 
+    [view_uebersicht].[Fahrzeughalter] AS [Fahrzeughalter], 
+    [view_uebersicht].[Niederlassung] AS [Niederlassung], 
+    [view_uebersicht].[Kraftstoff] AS [Kraftstoff], 
+    [view_uebersicht].[Neuwagen] AS [Neuwagen], 
+    [view_uebersicht].[Status] AS [Status], 
+    [view_uebersicht].[EinkaufId] AS [EinkaufId], 
+    [view_uebersicht].[ListenpreisB] AS [ListenpreisB], 
+    [view_uebersicht].[EKPreisB] AS [EKPreisB], 
+    [view_uebersicht].[Erstzulassung] AS [Erstzulassung], 
+    [view_uebersicht].[KMDatum] AS [KMDatum], 
+    [view_uebersicht].[Kaufdatum] AS [Kaufdatum], 
+    [view_uebersicht].[KMStand] AS [KMStand]
+    FROM [dbo].[view_uebersicht] AS [view_uebersicht]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FuhrparkContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -45,6 +132,26 @@
         <EntityContainer Name="FuhrparkContextEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" />
           <FunctionImport Name="GetIndexUebersicht" ReturnType="Collection(FuhrparkContextModel.GetIndexUebersicht_Result)" />
+          <FunctionImport Name="InsertIndexUebersicht">
+            <Parameter Name="Kennzeichen" Mode="In" Type="String" />
+            <Parameter Name="Marke" Mode="In" Type="String" />
+            <Parameter Name="Modell" Mode="In" Type="String" />
+            <Parameter Name="Fahrzeughalter" Mode="In" Type="String" />
+            <Parameter Name="Niederlassung" Mode="In" Type="String" />
+            <Parameter Name="Kraftstoff" Mode="In" Type="String" />
+            <Parameter Name="Neuwagen" Mode="In" Type="Boolean" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Erstzulassung" Mode="In" Type="String" />
+            <Parameter Name="KMDatum" Mode="In" Type="String" />
+            <Parameter Name="Kaufdatum" Mode="In" Type="String" />
+            <Parameter Name="KMStand" Mode="In" Type="String" />
+            <Parameter Name="ListenpreisB" Mode="In" Type="String" />
+            <Parameter Name="EKPreisB" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Kraftstoff" EntityType="FuhrparkContextModel.Kraftstoff" />
+          <EntitySet Name="Status" EntityType="FuhrparkContextModel.Status" />
+          <EntitySet Name="Fahrzeugeinkauf" EntityType="FuhrparkContextModel.Fahrzeugeinkauf" />
+          <EntitySet Name="view_uebersicht" EntityType="FuhrparkContextModel.view_uebersicht" />
         </EntityContainer>
         <ComplexType Name="GetIndexUebersicht_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -57,6 +164,53 @@
           <Property Type="Boolean" Name="Neuwagen" Nullable="true" />
           <Property Type="String" Name="Status" Nullable="true" MaxLength="Max" />
         </ComplexType>
+        <EntityType Name="Kraftstoff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Kraftstoff1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Status1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Fahrzeugeinkauf">
+          <Key>
+            <PropertyRef Name="EinkaufId" />
+          </Key>
+          <Property Name="EinkaufId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ListenpreisB" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EKPreisB" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Erstzulassung" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="KMDatum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Kaufdatum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="KMStand" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="view_uebersicht">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Kennzeichen" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Marke" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Modell" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fahrzeughalter" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Niederlassung" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Kraftstoff" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Neuwagen" Type="Boolean" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EinkaufId" Type="Int32" />
+          <Property Name="ListenpreisB" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EKPreisB" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Erstzulassung" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="KMDatum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Kaufdatum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="KMStand" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -93,6 +247,58 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertIndexUebersicht" FunctionName="FuhrparkContextModel.Store.InsertIndexUebersicht" />
+          <EntitySetMapping Name="Kraftstoff">
+            <EntityTypeMapping TypeName="FuhrparkContextModel.Kraftstoff">
+              <MappingFragment StoreEntitySet="Kraftstoff">
+                <ScalarProperty Name="Kraftstoff1" ColumnName="Kraftstoff" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="FuhrparkContextModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Status1" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fahrzeugeinkauf">
+            <EntityTypeMapping TypeName="FuhrparkContextModel.Fahrzeugeinkauf">
+              <MappingFragment StoreEntitySet="Fahrzeugeinkauf">
+                <ScalarProperty Name="KMStand" ColumnName="KMStand" />
+                <ScalarProperty Name="Kaufdatum" ColumnName="Kaufdatum" />
+                <ScalarProperty Name="KMDatum" ColumnName="KMDatum" />
+                <ScalarProperty Name="Erstzulassung" ColumnName="Erstzulassung" />
+                <ScalarProperty Name="EKPreisB" ColumnName="EKPreisB" />
+                <ScalarProperty Name="ListenpreisB" ColumnName="ListenpreisB" />
+                <ScalarProperty Name="EinkaufId" ColumnName="EinkaufId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_uebersicht">
+            <EntityTypeMapping TypeName="FuhrparkContextModel.view_uebersicht">
+              <MappingFragment StoreEntitySet="view_uebersicht">
+                <ScalarProperty Name="KMStand" ColumnName="KMStand" />
+                <ScalarProperty Name="Kaufdatum" ColumnName="Kaufdatum" />
+                <ScalarProperty Name="KMDatum" ColumnName="KMDatum" />
+                <ScalarProperty Name="Erstzulassung" ColumnName="Erstzulassung" />
+                <ScalarProperty Name="EKPreisB" ColumnName="EKPreisB" />
+                <ScalarProperty Name="ListenpreisB" ColumnName="ListenpreisB" />
+                <ScalarProperty Name="EinkaufId" ColumnName="EinkaufId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Neuwagen" ColumnName="Neuwagen" />
+                <ScalarProperty Name="Kraftstoff" ColumnName="Kraftstoff" />
+                <ScalarProperty Name="Niederlassung" ColumnName="Niederlassung" />
+                <ScalarProperty Name="Fahrzeughalter" ColumnName="Fahrzeughalter" />
+                <ScalarProperty Name="Modell" ColumnName="Modell" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Kennzeichen" ColumnName="Kennzeichen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

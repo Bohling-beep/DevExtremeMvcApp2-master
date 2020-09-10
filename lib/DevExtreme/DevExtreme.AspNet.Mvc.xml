@@ -4036,10 +4036,10 @@
             <summary>A function that is executed after an editor is created. Not executed for cells with an editCellTemplate.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridBuilder`1.OnEditorPreparing(System.String)">
-            <summary>A function used to customize or replace default editors. Not executed for cells with an editCellTemplate.</summary>
+            <summary>A function used to customize a cell&#39;s editor. Not executed for cells with an editCellTemplate.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridBuilder`1.OnEditorPreparing(DevExtreme.AspNet.Mvc.RazorBlock)">
-            <summary>A function used to customize or replace default editors. Not executed for cells with an editCellTemplate.</summary>
+            <summary>A function used to customize a cell&#39;s editor. Not executed for cells with an editCellTemplate.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridBuilder`1.OnExporting(System.String)">
             <summary>A function that is executed before data is exported.</summary>
@@ -4423,10 +4423,10 @@
             <summary>Specifies whether groups appear expanded or not when records are grouped by a specific column. Setting this option makes sense only when grouping is allowed for this column.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.Buttons(System.Collections.Generic.IEnumerable{DevExtreme.AspNet.Mvc.GridColumnButtonName})">
-            <summary>Allows you to customize buttons in the editing column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
+            <summary>Allows you to customize buttons in the edit column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.Buttons(System.Action{DevExtreme.AspNet.Mvc.Factories.CollectionFactory{DevExtreme.AspNet.Mvc.Builders.DataGridColumnButtonBuilder}})">
-            <summary>Allows you to customize buttons in the editing column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
+            <summary>Allows you to customize buttons in the edit column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.CalculateCellValue(System.String)">
             <summary>Calculates custom cell values. Use this function to create an unbound data column.</summary>
@@ -4540,13 +4540,13 @@
             <summary>In a boolean column, replaces all false items with a specified text. Applies only if showEditorAlways option is false.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.FilterOperations(System.Collections.Generic.IEnumerable{DevExtreme.AspNet.Mvc.GridFilterOperations})">
-            <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
+            <summary>Specifies the available filter operations. Applies if allowFiltering is true and the filterRow and/or filterPanel are visible.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.FilterOperations(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
+            <summary>Specifies the available filter operations. Applies if allowFiltering is true and the filterRow and/or filterPanel are visible.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.FilterOperations(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
+            <summary>Specifies the available filter operations. Applies if allowFiltering is true and the filterRow and/or filterPanel are visible.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnBuilder`1.FilterType(DevExtreme.AspNet.Mvc.FilterType)">
             <summary>Specifies whether a user changes the current filter by including (selecting) or excluding (clearing the selection of) values. Applies only if headerFilter.visible and allowHeaderFiltering are true.</summary>
@@ -4741,7 +4741,7 @@
             <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
         </member>
         <member name="T:DevExtreme.AspNet.Mvc.Builders.DataGridColumnButtonBuilder">
-            <summary>Allows you to customize buttons in the editing column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
+            <summary>Allows you to customize buttons in the edit column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridColumnButtonBuilder.Option(System.String,System.Object)">
             <summary>Specifies an option by its name.</summary>
@@ -5059,10 +5059,10 @@
             <summary>Contains options that specify texts for editing-related UI elements.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridEditingBuilder`1.UseIcons(System.Boolean)">
-            <summary>Specifies whether the editing column uses icons instead of links.</summary>
+            <summary>Specifies whether the edit column uses icons instead of links.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridEditingBuilder`1.UseIcons(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies whether the editing column uses icons instead of links.</summary>
+            <summary>Specifies whether the edit column uses icons instead of links.</summary>
         </member>
         <member name="T:DevExtreme.AspNet.Mvc.Builders.DataGridEditingTextsBuilder">
             <summary>Contains options that specify texts for editing-related UI elements.</summary>
@@ -6037,7 +6037,7 @@
             <summary>Specifies the mode in which all the records are selected. Applies only if selection.allowSelectAll is true.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DataGridSelectionBuilder.ShowCheckBoxesMode(DevExtreme.AspNet.Mvc.GridSelectionShowCheckBoxesMode)">
-            <summary>Specifies when to display check boxes in rows. Applies only if selection.mode is &quot;multiple&quot;.</summary>
+            <summary>Specifies when to display the selection column and row selection checkboxes. Applies only if selection.mode is &quot;multiple&quot;.</summary>
         </member>
         <member name="T:DevExtreme.AspNet.Mvc.Builders.DataGridSortByGroupSummaryInfoBuilder">
             <summary>Allows you to sort groups according to the values of group summary items.</summary>
@@ -7639,10 +7639,10 @@
             <summary>Specifies the name of a data source field or an expression that provides a node&#39;s height.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DiagramNodesBuilder.ImageUrlExpr(System.String)">
-            <summary>Specifies the name of a data source field or an expression that provides a node image&#39;s URL.</summary>
+            <summary>Specifies the name of a data source field or expression that provides an image URL or Base64 encoded image for a node.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DiagramNodesBuilder.ImageUrlExpr(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies the name of a data source field or an expression that provides a node image&#39;s URL.</summary>
+            <summary>Specifies the name of a data source field or expression that provides an image URL or Base64 encoded image for a node.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.DiagramNodesBuilder.ItemsExpr(System.String)">
             <summary>Specifies the name of a data source field or an expression that provides a node&#39;s child items.</summary>
@@ -11008,19 +11008,19 @@
             <summary>Specifies a name that identifies the form item.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.FormSimpleItemBuilder.Template(System.String)">
-            <summary>A template to be used for rendering the form item.</summary>
+            <summary>A template that can be used to replace the default editor with custom content.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.FormSimpleItemBuilder.Template(DevExtreme.AspNet.Mvc.RazorBlock)">
-            <summary>A template to be used for rendering the form item.</summary>
+            <summary>A template that can be used to replace the default editor with custom content.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.FormSimpleItemBuilder.Template(DevExtreme.AspNet.Mvc.TemplateName)">
-            <summary>A template to be used for rendering the form item.</summary>
+            <summary>A template that can be used to replace the default editor with custom content.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.FormSimpleItemBuilder.Template(DevExtreme.AspNet.Mvc.JS)">
-            <summary>A template to be used for rendering the form item.</summary>
+            <summary>A template that can be used to replace the default editor with custom content.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.FormSimpleItemBuilder.Template(System.Action)">
-            <summary>A template to be used for rendering the form item.</summary>
+            <summary>A template that can be used to replace the default editor with custom content.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.FormSimpleItemBuilder.ValidationRules(System.Action{DevExtreme.AspNet.Mvc.Factories.ValidationRulesFactory})">
             <summary>An array of validation rules to be checked for the form item editor.</summary>
@@ -13641,6 +13641,12 @@
         <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.DisplayExpr(DevExtreme.AspNet.Mvc.JS)">
             <summary>Specifies the data field whose values should be displayed.</summary>
         </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.DropDownCentered(System.Boolean)">
+            <summary>Specifies whether to vertically align the drop-down menu so that the selected item is in its center. Applies only in Material Design themes.</summary>
+        </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.DropDownCentered(DevExtreme.AspNet.Mvc.JS)">
+            <summary>Specifies whether to vertically align the drop-down menu so that the selected item is in its center. Applies only in Material Design themes.</summary>
+        </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.DropDownOptions(System.Action{DevExtreme.AspNet.Mvc.Builders.PopoverBuilder})">
             <summary>Configures the drop-down field.</summary>
         </member>
@@ -13969,10 +13975,10 @@
             <summary>Specifies whether or not the widget uses native scrolling.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.UsePopover(System.Boolean)">
-            <summary>Specifies whether or not to show lookup contents in a Popover widget.</summary>
+            <summary>Specifies whether to show lookup contents in the Popover widget.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.UsePopover(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies whether or not to show lookup contents in a Popover widget.</summary>
+            <summary>Specifies whether to show lookup contents in the Popover widget.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.LookupBuilder.ValidationError(System.Object)">
             <summary>Information on the broken validation rule. Contains the first item from the validationErrors array.</summary>
@@ -20062,13 +20068,13 @@
             <summary>Specifies whether the widget responds to user interaction.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.SchedulerBuilder.Editing(System.Action{DevExtreme.AspNet.Mvc.Builders.SchedulerEditingBuilder})">
-            <summary>Specifies which editing operations an end-user can perform on appointments.</summary>
+            <summary>Specifies which editing operations a user can perform on appointments.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.SchedulerBuilder.Editing(System.Boolean)">
-            <summary>Specifies which editing operations an end-user can perform on appointments.</summary>
+            <summary>Specifies which editing operations a user can perform on appointments.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.SchedulerBuilder.Editing(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies which editing operations an end-user can perform on appointments.</summary>
+            <summary>Specifies which editing operations a user can perform on appointments.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.SchedulerBuilder.ElementAttr(System.String,System.Object)">
             <summary>Specifies the attributes to be attached to the widget&#39;s root element.</summary>
@@ -20425,7 +20431,7 @@
             <summary>Specifies the widget&#39;s width.</summary>
         </member>
         <member name="T:DevExtreme.AspNet.Mvc.Builders.SchedulerEditingBuilder">
-            <summary>Specifies which editing operations an end-user can perform on appointments.</summary>
+            <summary>Specifies which editing operations a user can perform on appointments.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.SchedulerEditingBuilder.Option(System.String,System.Object)">
             <summary>Specifies an option by its name.</summary>
@@ -25950,12 +25956,6 @@
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListBuilder`1.OnEditorPrepared(DevExtreme.AspNet.Mvc.RazorBlock)">
             <summary>A function that is executed after an editor is created. Not executed for cells with an editCellTemplate.</summary>
         </member>
-        <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListBuilder`1.OnEditorPreparing(System.String)">
-            <summary>A function used to customize or replace default editors. Not executed for cells with an editCellTemplate.</summary>
-        </member>
-        <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListBuilder`1.OnEditorPreparing(DevExtreme.AspNet.Mvc.RazorBlock)">
-            <summary>A function used to customize or replace default editors. Not executed for cells with an editCellTemplate.</summary>
-        </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListBuilder`1.OnFocusedCellChanged(System.String)">
             <summary>A function that is executed after the focused cell changes. Applies only to cells in data rows.</summary>
         </member>
@@ -26299,10 +26299,10 @@
             <summary>Specifies whether a user can sort rows by this column at runtime. Applies only if sorting.mode differs from &quot;none&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.Buttons(System.Collections.Generic.IEnumerable{DevExtreme.AspNet.Mvc.TreeListColumnButtonName})">
-            <summary>Allows you to customize buttons in the editing column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
+            <summary>Allows you to customize buttons in the edit column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.Buttons(System.Action{DevExtreme.AspNet.Mvc.Factories.CollectionFactory{DevExtreme.AspNet.Mvc.Builders.TreeListColumnButtonBuilder}})">
-            <summary>Allows you to customize buttons in the editing column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
+            <summary>Allows you to customize buttons in the edit column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.CalculateCellValue(System.String)">
             <summary>Calculates custom cell values. Use this function to create an unbound data column.</summary>
@@ -26410,13 +26410,13 @@
             <summary>In a boolean column, replaces all false items with a specified text. Applies only if showEditorAlways option is false.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.FilterOperations(System.Collections.Generic.IEnumerable{DevExtreme.AspNet.Mvc.GridFilterOperations})">
-            <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
+            <summary>Specifies the available filter operations. Applies if allowFiltering is true and the filterRow and/or filterPanel are visible.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.FilterOperations(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
+            <summary>Specifies the available filter operations. Applies if allowFiltering is true and the filterRow and/or filterPanel are visible.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.FilterOperations(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies a set of available filter operations. Applies only if filterRow.visible and allowFiltering are true.</summary>
+            <summary>Specifies the available filter operations. Applies if allowFiltering is true and the filterRow and/or filterPanel are visible.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnBuilder`1.FilterType(DevExtreme.AspNet.Mvc.FilterType)">
             <summary>Specifies whether a user changes the current filter by including (selecting) or excluding (clearing the selection of) values. Applies only if headerFilter.visible and allowHeaderFiltering are true.</summary>
@@ -26581,7 +26581,7 @@
             <summary>Specifies the column&#39;s width in pixels or as a percentage. Ignored if it is less than minWidth.</summary>
         </member>
         <member name="T:DevExtreme.AspNet.Mvc.Builders.TreeListColumnButtonBuilder">
-            <summary>Allows you to customize buttons in the editing column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
+            <summary>Allows you to customize buttons in the edit column or create a custom command column. Applies only if the column&#39;s type is &quot;buttons&quot;.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListColumnButtonBuilder.Option(System.String,System.Object)">
             <summary>Specifies an option by its name.</summary>
@@ -26899,10 +26899,10 @@
             <summary>Contains options that specify texts for editing-related UI elements.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListEditingBuilder`1.UseIcons(System.Boolean)">
-            <summary>Specifies whether the editing column uses icons instead of links.</summary>
+            <summary>Specifies whether the edit column uses icons instead of links.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.TreeListEditingBuilder`1.UseIcons(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies whether the editing column uses icons instead of links.</summary>
+            <summary>Specifies whether the edit column uses icons instead of links.</summary>
         </member>
         <member name="T:DevExtreme.AspNet.Mvc.Builders.TreeListEditingTextsBuilder">
             <summary>Contains options that specify texts for editing-related UI elements.</summary>
@@ -35388,6 +35388,12 @@
         <member name="M:DevExtreme.AspNet.Mvc.Builders.ChartTooltipBuilder.Format(System.Action{DevExtreme.AspNet.Mvc.Builders.FormatBuilder})">
             <summary>Formats a value before it is displayed it in a tooltip.</summary>
         </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.ChartTooltipBuilder.Interactive(System.Boolean)">
+            <summary>Allows users to interact with the tooltip content.</summary>
+        </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.ChartTooltipBuilder.Interactive(DevExtreme.AspNet.Mvc.JS)">
+            <summary>Allows users to interact with the tooltip content.</summary>
+        </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.ChartTooltipBuilder.Location(DevExtreme.AspNet.Mvc.ChartTooltipLocation)">
             <summary>Specifies whether the tooltip must be located in the center of a series point or on its edge. Applies to bar-like and bubble series only.</summary>
         </member>
@@ -41304,6 +41310,12 @@
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PieChartTooltipBuilder.Format(System.Action{DevExtreme.AspNet.Mvc.Builders.FormatBuilder})">
             <summary>Formats a value before it is displayed it in a tooltip.</summary>
         </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.PieChartTooltipBuilder.Interactive(System.Boolean)">
+            <summary>Allows users to interact with the tooltip content.</summary>
+        </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.PieChartTooltipBuilder.Interactive(DevExtreme.AspNet.Mvc.JS)">
+            <summary>Allows users to interact with the tooltip content.</summary>
+        </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PieChartTooltipBuilder.Opacity(System.Double)">
             <summary>Specifies tooltips&#39; transparency.</summary>
         </member>
@@ -41758,16 +41770,16 @@
             <summary>Specifies the minimum distance between two neighboring major ticks in pixels. Applies only to the axes of the &quot;continuous&quot; and &quot;logarithmic&quot; types.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartArgumentAxisBuilder.Categories(System.Collections.Generic.IEnumerable{System.Double})">
-            <summary>Specifies the order in which arguments (categories) are arranged on the discrete argument axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartArgumentAxisBuilder.Categories(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>Specifies the order in which arguments (categories) are arranged on the discrete argument axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartArgumentAxisBuilder.Categories(System.Collections.Generic.IEnumerable{System.DateTime})">
-            <summary>Specifies the order in which arguments (categories) are arranged on the discrete argument axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartArgumentAxisBuilder.Categories(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies the order in which arguments (categories) are arranged on the discrete argument axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartArgumentAxisBuilder.Color(System.String)">
             <summary>Specifies the color of the line that represents an axis.</summary>
@@ -45393,6 +45405,12 @@
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartTooltipBuilder.Format(System.Action{DevExtreme.AspNet.Mvc.Builders.FormatBuilder})">
             <summary>Formats a value before it is displayed it in a tooltip.</summary>
         </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartTooltipBuilder.Interactive(System.Boolean)">
+            <summary>Allows users to interact with the tooltip content.</summary>
+        </member>
+        <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartTooltipBuilder.Interactive(DevExtreme.AspNet.Mvc.JS)">
+            <summary>Allows users to interact with the tooltip content.</summary>
+        </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartTooltipBuilder.Opacity(System.Double)">
             <summary>Specifies tooltips&#39; transparency.</summary>
         </member>
@@ -45481,16 +45499,16 @@
             <summary>Specifies a coefficient for dividing the value axis.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartValueAxisBuilder.Categories(System.Collections.Generic.IEnumerable{System.Double})">
-            <summary>Specifies the order in which discrete values are arranged on the value axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartValueAxisBuilder.Categories(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>Specifies the order in which discrete values are arranged on the value axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartValueAxisBuilder.Categories(System.Collections.Generic.IEnumerable{System.DateTime})">
-            <summary>Specifies the order in which discrete values are arranged on the value axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartValueAxisBuilder.Categories(DevExtreme.AspNet.Mvc.JS)">
-            <summary>Specifies the order in which discrete values are arranged on the value axis.</summary>
+            <summary>Specifies the order of categories on an axis of the &quot;discrete&quot; type.</summary>
         </member>
         <member name="M:DevExtreme.AspNet.Mvc.Builders.PolarChartValueAxisBuilder.Color(System.String)">
             <summary>Specifies the color of the line that represents an axis.</summary>

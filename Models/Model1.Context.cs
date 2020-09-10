@@ -28,12 +28,75 @@ namespace DevExtremeMvcApp2.Models
         }
     
         public virtual DbSet<uebersicht_daten> uebersicht_daten { get; set; }
+        public virtual DbSet<Kraftstoff> Kraftstoff { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Fahrzeugeinkauf> Fahrzeugeinkauf { get; set; }
+        public virtual DbSet<view_uebersicht> view_uebersicht { get; set; }
     
         public virtual ObjectResult<GetIndexUebersicht_Result> GetIndexUebersicht()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIndexUebersicht_Result>("GetIndexUebersicht");
         }
-
-        public System.Data.Entity.DbSet<DevExtremeMvcApp2.Models.GetIndexUebersicht_Result> GetIndexUebersicht_Result { get; set; }
+    
+        public virtual int InsertIndexUebersicht(string kennzeichen, string marke, string modell, string fahrzeughalter, string niederlassung, string kraftstoff, Nullable<bool> neuwagen, string status, string erstzulassung, string kMDatum, string kaufdatum, string kMStand, string listenpreisB, string eKPreisB)
+        {
+            var kennzeichenParameter = kennzeichen != null ?
+                new ObjectParameter("Kennzeichen", kennzeichen) :
+                new ObjectParameter("Kennzeichen", typeof(string));
+    
+            var markeParameter = marke != null ?
+                new ObjectParameter("Marke", marke) :
+                new ObjectParameter("Marke", typeof(string));
+    
+            var modellParameter = modell != null ?
+                new ObjectParameter("Modell", modell) :
+                new ObjectParameter("Modell", typeof(string));
+    
+            var fahrzeughalterParameter = fahrzeughalter != null ?
+                new ObjectParameter("Fahrzeughalter", fahrzeughalter) :
+                new ObjectParameter("Fahrzeughalter", typeof(string));
+    
+            var niederlassungParameter = niederlassung != null ?
+                new ObjectParameter("Niederlassung", niederlassung) :
+                new ObjectParameter("Niederlassung", typeof(string));
+    
+            var kraftstoffParameter = kraftstoff != null ?
+                new ObjectParameter("Kraftstoff", kraftstoff) :
+                new ObjectParameter("Kraftstoff", typeof(string));
+    
+            var neuwagenParameter = neuwagen.HasValue ?
+                new ObjectParameter("Neuwagen", neuwagen) :
+                new ObjectParameter("Neuwagen", typeof(bool));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var erstzulassungParameter = erstzulassung != null ?
+                new ObjectParameter("Erstzulassung", erstzulassung) :
+                new ObjectParameter("Erstzulassung", typeof(string));
+    
+            var kMDatumParameter = kMDatum != null ?
+                new ObjectParameter("KMDatum", kMDatum) :
+                new ObjectParameter("KMDatum", typeof(string));
+    
+            var kaufdatumParameter = kaufdatum != null ?
+                new ObjectParameter("Kaufdatum", kaufdatum) :
+                new ObjectParameter("Kaufdatum", typeof(string));
+    
+            var kMStandParameter = kMStand != null ?
+                new ObjectParameter("KMStand", kMStand) :
+                new ObjectParameter("KMStand", typeof(string));
+    
+            var listenpreisBParameter = listenpreisB != null ?
+                new ObjectParameter("ListenpreisB", listenpreisB) :
+                new ObjectParameter("ListenpreisB", typeof(string));
+    
+            var eKPreisBParameter = eKPreisB != null ?
+                new ObjectParameter("EKPreisB", eKPreisB) :
+                new ObjectParameter("EKPreisB", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertIndexUebersicht", kennzeichenParameter, markeParameter, modellParameter, fahrzeughalterParameter, niederlassungParameter, kraftstoffParameter, neuwagenParameter, statusParameter, erstzulassungParameter, kMDatumParameter, kaufdatumParameter, kMStandParameter, listenpreisBParameter, eKPreisBParameter);
+        }
     }
 }

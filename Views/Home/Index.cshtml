@@ -1,16 +1,93 @@
 @model IEnumerable<DevExtremeMvcApp2.Models.GetIndexUebersicht_Result>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <h2>Index</h2>
 
 
-@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.GetIndexUebersicht_Result>()
+
+
+@(Html.DevExtreme()
+    .DataGrid<DevExtremeMvcApp2.Models.uebersicht_daten>()
+    .Editing (e => e.Mode(GridEditMode.Popup)
+        .AllowAdding(true)
+        .AllowDeleting(true)
+        .AllowUpdating(true)
+        .Popup(p => p
+                .Title("Edit")
+                .Width("100%")
+                .Height("100%")
+                .Position(pos => pos
+                    //.My(HorizontalAlignment.Center, VerticalAlignment.Center)
+                    //.At(HorizontalAlignment.Center, VerticalAlignment.Center)
+                    .Of(new JS("window"))
+                    )
+            )
+
+            .Form(f => f.Items(items =>
+            {
+                items.AddGroup()
+                    .Caption("Zuordnung")
+                    .ColCount(3)
+                    .ColSpan(3)
+                    .Items(groupItems =>
+                    {
+                        groupItems.AddSimpleFor(m => m.Kennzeichen);
+                        groupItems.AddSimpleFor(m => m.Marke);
+                        groupItems.AddSimpleFor(m => m.Modell);
+                        groupItems.AddSimpleFor(m => m.Kraftstoff);
+                        groupItems.AddSimpleFor(m => m.Neuwagen);
+                        groupItems.AddSimpleFor(m => m.Status);
+                    });
+
+
+
+
+
+
+            }))
+    )
+
+
+
     .DataSource(ds => ds.WebApi()
-        .RouteName("GetIndexUebersicht_ResultApi")
+        .RouteName("uebersicht_datenneuApi")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Id")
+
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+        columns.AddFor(m => m.Id);
+
+        columns.AddFor(m => m.Kennzeichen);
+
+        columns.AddFor(m => m.Marke);
+
+        columns.AddFor(m => m.Modell);
+
+        columns.AddFor(m => m.Fahrzeughalter);
+
+        columns.AddFor(m => m.Niederlassung);
+
+        columns.AddFor(m => m.Kraftstoff);
+
+        columns.AddFor(m => m.Neuwagen);
+
+
+
+    })
+
+   )
+
+@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.view_uebersicht>()
+    .DataSource(ds => ds.WebApi()
+        .RouteName("view_uebersichtApi")
         .LoadAction("Get")
         .InsertAction("Post")
         .UpdateAction("Put")
@@ -37,6 +114,20 @@
         columns.AddFor(m => m.Neuwagen);
 
         columns.AddFor(m => m.Status);
+
+        columns.AddFor(m => m.EinkaufId);
+
+        columns.AddFor(m => m.ListenpreisB);
+
+        columns.AddFor(m => m.EKPreisB);
+
+        columns.AddFor(m => m.Erstzulassung);
+
+        columns.AddFor(m => m.KMDatum);
+
+        columns.AddFor(m => m.Kaufdatum);
+
+        columns.AddFor(m => m.KMStand);
     })
     .Editing(e => e
         .AllowAdding(true)
@@ -44,41 +135,3 @@
         .AllowDeleting(true)
     )
 )
-@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.uebersicht_daten>()
-    .DataSource(ds => ds.WebApi()
-        .RouteName("uebersicht_datenApi")
-        .LoadAction("Get")
-        .InsertAction("Post")
-        .UpdateAction("Put")
-        .DeleteAction("Delete")
-        .Key("Id")
-    )
-    .RemoteOperations(true)
-    .Columns(columns => {
-
-        columns.AddFor(m => m.Id);
-
-        columns.AddFor(m => m.Kennzeichen);
-
-        columns.AddFor(m => m.Marke);
-
-        columns.AddFor(m => m.Modell);
-
-        columns.AddFor(m => m.Fahrzeughalter);
-
-        columns.AddFor(m => m.Niederlassung);
-
-        columns.AddFor(m => m.Kraftstoff);
-
-        columns.AddFor(m => m.Neuwagen);
-
-        columns.AddFor(m => m.Status);
-    })
-    .Editing(e => e
-        .AllowAdding(true)
-        .AllowUpdating(true)
-        .AllowDeleting(true)
-    )
-)
-
-
