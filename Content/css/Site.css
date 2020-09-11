@@ -7,7 +7,7 @@ body, html {
 #app-side-nav-outer-toolbar {
     flex-direction: column;
     display: flex; 
-    height: 100%;
+    height: 120%;
     width: 100%;
 }
 
@@ -168,4 +168,24 @@ body, html {
 
 .menu-container .dx-treeview .dx-treeview-node-container .dx-treeview-node:not(.dx-state-focused) > .dx-treeview-item.dx-state-hover {
     background-color: #3F3F4B;
+}
+.first-group,
+.second-group {
+    padding: 20px;
+}
+
+.second-group {
+    background-color: rgba(191, 191, 191, 0.15);
+}
+
+.form-avatar {
+    height: 128px;
+    width: 128px;
+    margin-right: 10px;
+    border: 1px solid #d2d3d5;
+    border-radius: 50%;
+    background-image: url('\Desktop\mtlogo\mt-logo-web-w.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }

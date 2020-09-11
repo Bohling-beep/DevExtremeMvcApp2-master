@@ -27,7 +27,8 @@ namespace DevExtremeMvcApp2.Controllers
         [HttpGet]
         public async Task<HttpResponseMessage> Get(DataSourceLoadOptions loadOptions)
         {
-            var view_uebersicht = _context.view_uebersicht.Select(i => new {
+            var view_uebersicht = _context.view_uebersicht.Select(i => new
+            {
                 i.Id,
                 i.Kennzeichen,
                 i.Marke,
@@ -57,7 +58,8 @@ namespace DevExtremeMvcApp2.Controllers
 
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(FormDataCollection form) {
+        public async Task<HttpResponseMessage> Post(FormDataCollection form)
+        {
 
 
             var values = JsonConvert.DeserializeObject<IDictionary>(form.Get("values"));
@@ -99,14 +101,14 @@ namespace DevExtremeMvcApp2.Controllers
                 model.EKPreisB = Convert.ToString(values[EKPREIS_B])
 
                 );
-      
-                    
-          
-         //   PopulateModel(model, values);           
-            
 
-           
-            await _context.SaveChangesAsync();     
+
+
+            //   PopulateModel(model, values);           
+
+
+
+            await _context.SaveChangesAsync();
 
 
 
@@ -114,10 +116,11 @@ namespace DevExtremeMvcApp2.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> Put(FormDataCollection form) {
+        public async Task<HttpResponseMessage> Put(FormDataCollection form)
+        {
             var key = Convert.ToInt32(form.Get("key"));
             var model = await _context.uebersicht_daten.FirstOrDefaultAsync(item => item.Id == key);
-            if(model == null)
+            if (model == null)
                 return Request.CreateResponse(HttpStatusCode.Conflict, "Object not found");
 
             var values = JsonConvert.DeserializeObject<IDictionary>(form.Get("values"));
@@ -133,7 +136,8 @@ namespace DevExtremeMvcApp2.Controllers
         }
 
         [HttpDelete]
-        public async Task Delete(FormDataCollection form) {
+        public async Task Delete(FormDataCollection form)
+        {
             var key = Convert.ToInt32(form.Get("key"));
             var model = await _context.uebersicht_daten.FirstOrDefaultAsync(item => item.Id == key);
 
@@ -142,7 +146,8 @@ namespace DevExtremeMvcApp2.Controllers
         }
 
 
-        private void PopulateModel(uebersicht_daten model, IDictionary values) {
+        private void PopulateModel(uebersicht_daten model, IDictionary values)
+        {
             string ID = nameof(uebersicht_daten.Id);
             string KENNZEICHEN = nameof(uebersicht_daten.Kennzeichen);
             string MARKE = nameof(uebersicht_daten.Marke);
@@ -153,62 +158,74 @@ namespace DevExtremeMvcApp2.Controllers
             string NEUWAGEN = nameof(uebersicht_daten.Neuwagen);
             string STATUS = nameof(uebersicht_daten.Status);
 
-            if(values.Contains(ID)) {
+            if (values.Contains(ID))
+            {
                 model.Id = Convert.ToInt32(values[ID]);
             }
 
-            if(values.Contains(KENNZEICHEN)) {
+            if (values.Contains(KENNZEICHEN))
+            {
                 model.Kennzeichen = Convert.ToString(values[KENNZEICHEN]);
             }
 
-            if(values.Contains(MARKE)) {
+            if (values.Contains(MARKE))
+            {
                 model.Marke = Convert.ToString(values[MARKE]);
             }
 
-            if(values.Contains(MODELL)) {
+            if (values.Contains(MODELL))
+            {
                 model.Modell = Convert.ToString(values[MODELL]);
             }
 
-            if(values.Contains(FAHRZEUGHALTER)) {
+            if (values.Contains(FAHRZEUGHALTER))
+            {
                 model.Fahrzeughalter = Convert.ToString(values[FAHRZEUGHALTER]);
             }
 
-            if(values.Contains(NIEDERLASSUNG)) {
+            if (values.Contains(NIEDERLASSUNG))
+            {
                 model.Niederlassung = Convert.ToString(values[NIEDERLASSUNG]);
             }
 
-            if(values.Contains(KRAFTSTOFF)) {
+            if (values.Contains(KRAFTSTOFF))
+            {
                 model.Kraftstoff = Convert.ToString(values[KRAFTSTOFF]);
             }
 
-            if(values.Contains(NEUWAGEN)) {
+            if (values.Contains(NEUWAGEN))
+            {
                 model.Neuwagen = values[NEUWAGEN] != null ? Convert.ToBoolean(values[NEUWAGEN]) : (bool?)null;
             }
 
-            if(values.Contains(STATUS)) {
+            if (values.Contains(STATUS))
+            {
                 model.Status = Convert.ToString(values[STATUS]);
             }
         }
-        
 
-        private string GetFullErrorMessage(ModelStateDictionary modelState) {
+
+        private string GetFullErrorMessage(ModelStateDictionary modelState)
+        {
             var messages = new List<string>();
 
-            foreach(var entry in modelState) {
-                foreach(var error in entry.Value.Errors)
+            foreach (var entry in modelState)
+            {
+                foreach (var error in entry.Value.Errors)
                     messages.Add(error.ErrorMessage);
             }
 
             return String.Join(" ", messages);
         }
 
-        protected override void Dispose(bool disposing) {
-            if (disposing) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
                 _context.Dispose();
             }
             base.Dispose(disposing);
         }
-
 
     }
 }

@@ -1,0 +1,64 @@
+@{
+	var cardView = Html.DevExpress().CardView(settings => {
+        settings.Name = "CardView";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "CardViewPartial" };
+
+				settings.SettingsEditing.AddNewCardRouteValues = new { Controller = "Home", Action = "CardViewPartialAddNew" };
+        settings.SettingsEditing.UpdateCardRouteValues = new { Controller = "Home", Action = "CardViewPartialUpdate" };
+        settings.SettingsEditing.DeleteCardRouteValues = new { Controller = "Home", Action = "CardViewPartialDelete" };
+        settings.SettingsEditing.Mode = CardViewEditingMode.EditForm;
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+		settings.KeyFieldName = "Id";
+
+		settings.SettingsPager.Visible = true;
+				settings.Settings.ShowHeaderPanel = true;
+		settings.Settings.ShowHeaderFilterButton = true;
+				settings.SettingsBehavior.AllowSelectByCardClick = true;
+
+			
+				settings.Columns.Add("Kennzeichen");
+				settings.Columns.Add("Marke");
+				settings.Columns.Add("Modell");
+				settings.Columns.Add("Fahrzeughalter");
+				settings.Columns.Add("Niederlassung");
+				settings.Columns.Add("Kraftstoff");
+				
+				settings.Columns.Add("Status");
+				
+				settings.Columns.Add("ListenpreisB");
+				settings.Columns.Add("EKPreisB");
+				settings.Columns.Add("Erstzulassung");
+				settings.Columns.Add("KMDatum");
+				settings.Columns.Add("Kaufdatum");
+				settings.Columns.Add("KMStand");
+
+				settings.CardLayoutProperties.Items.AddCommandItem(i => {
+			i.ShowNewButton = true;
+			i.ShowEditButton = true;
+			i.ShowDeleteButton = true;
+		});
+		settings.CardLayoutProperties.Items.AddEditModeCommandItem();
+						
+				settings.CardLayoutProperties.Items.Add("Kennzeichen");
+				settings.CardLayoutProperties.Items.Add("Marke");
+				settings.CardLayoutProperties.Items.Add("Modell");
+				settings.CardLayoutProperties.Items.Add("Fahrzeughalter");
+				settings.CardLayoutProperties.Items.Add("Niederlassung");
+				settings.CardLayoutProperties.Items.Add("Kraftstoff");
+				
+				settings.CardLayoutProperties.Items.Add("Status");
+		
+		
+				settings.CardLayoutProperties.Items.Add("ListenpreisB");
+				settings.CardLayoutProperties.Items.Add("EKPreisB");
+				settings.CardLayoutProperties.Items.Add("Erstzulassung");
+				settings.CardLayoutProperties.Items.Add("KMDatum");
+				settings.CardLayoutProperties.Items.Add("Kaufdatum");
+				settings.CardLayoutProperties.Items.Add("KMStand");
+			});
+		if (ViewData["EditError"] != null){
+        cardView.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@cardView.Bind(Model).GetHtml()

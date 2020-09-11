@@ -1,4 +1,4 @@
-
+using DevExpress.Web.Mvc;
 using DevExtremeMvcApp2.Models;
 
 using Microsoft.Ajax.Utilities;
@@ -48,7 +48,86 @@ namespace DevExtremeMvcApp2.Controllers {
 
             return PartialView("~/Views/Home/_GanttPartial.cshtml");
         }
+        public ActionResult Modelle()
+
+        {
+
+            return View();
+        }
 
 
+        DevExtremeMvcApp2.Models.FuhrparkContextEntities db = new DevExtremeMvcApp2.Models.FuhrparkContextEntities();
+
+        [ValidateInput(false)]
+        public ActionResult CardViewPartial()
+        {
+            var model = db.view_uebersicht;
+            return PartialView("_CardViewPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CardViewPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] DevExtremeMvcApp2.Models.view_uebersicht item)
+        {
+            var model = db.view_uebersicht;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_CardViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CardViewPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] DevExtremeMvcApp2.Models.view_uebersicht item)
+        {
+            var model = db.view_uebersicht;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.Id == item.Id);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_CardViewPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CardViewPartialDelete(System.Int32 Id)
+        {
+            var model = db.view_uebersicht;
+            if (Id >= 0)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.Id == Id);
+                    if (item != null)
+                        model.Remove(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_CardViewPartial", model.ToList());
+        }
     }
 }

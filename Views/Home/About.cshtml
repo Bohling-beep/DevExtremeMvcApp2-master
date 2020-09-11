@@ -5,44 +5,93 @@
 
 <h2>Termine</h2>
 
-@(Html.DevExtreme().Form<DevExtremeMvcApp2.Models.view_uebersicht>()
-    .Items(items => {
-        items.AddGroup().Caption("Group1").Items(groupItems => {
 
-            groupItems.AddSimpleFor(m => m.Id);
-
-            groupItems.AddSimpleFor(m => m.Kennzeichen);
-
-            groupItems.AddSimpleFor(m => m.Marke);
-
-            groupItems.AddSimpleFor(m => m.Modell);
-
-            groupItems.AddSimpleFor(m => m.Fahrzeughalter);
-
-            groupItems.AddSimpleFor(m => m.Niederlassung);
-
-            groupItems.AddSimpleFor(m => m.Kraftstoff);
-
-            groupItems.AddSimpleFor(m => m.Neuwagen);
-
-            groupItems.AddSimpleFor(m => m.Status);
-
-            groupItems.AddSimpleFor(m => m.EinkaufId);
-
-            groupItems.AddSimpleFor(m => m.ListenpreisB);
-
-            groupItems.AddSimpleFor(m => m.EKPreisB);
-
-            groupItems.AddSimpleFor(m => m.Erstzulassung);
-
-            groupItems.AddSimpleFor(m => m.KMDatum);
-
-            groupItems.AddSimpleFor(m => m.Kaufdatum);
-
-            groupItems.AddSimpleFor(m => m.KMStand);
-        });
+@(Html.DevExtreme().Scheduler()
+    .ID("scheduler")
+    .DataSource(new JS("appointments"))
+    .Views(new[] {
+      DevExtreme.AspNet.Mvc.SchedulerViewType.Week,
+      DevExtreme.AspNet.Mvc.SchedulerViewType.Month
     })
+    .CurrentView(DevExtreme.AspNet.Mvc.SchedulerViewType.Week)
+    
+    .CurrentDate(new DateTime(2020, 9, 11))
+    .StartDayHour(9)
+    .Height(900)
+    
+    
 )
 
+<script src="~/Scripts/data/appointments.js"></script>
 
+
+<div id="form">
+    @(Html.DevExtreme().Form<DevExtremeMvcApp2.Models.view_uebersicht>()
+        .ID("form")
+        .Items(items => {
+            items.AddGroup()
+                .CssClass("first-group")
+                .ColCount(4)
+                .Items(groupItems => {
+                    groupItems.AddSimple().Template("<div class='form-avatar'></div>");
+                    groupItems.AddGroup().ColSpan(3).Items(secondGroupItems => {
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff)
+                            .Editor(e => e
+                                .DateBox()
+                                .Width("100%")
+                            )
+                            .IsRequired(false);
+                    });
+                });
+
+
+            items.AddGroup()
+                .CssClass("second-group")
+                .ColCount(2)
+                .Items(groupItems => {
+                    groupItems.AddGroup().Items(secondGroupItems => {
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff)
+                            .Editor(e => e
+                                .SelectBox()
+                                .DataSource(new[] {
+                                        "Benzin",
+                                        "Diesel"
+                                 
+                                    }
+                                )
+                                .Value("")
+                            );
+                    });
+                    groupItems.AddGroup().Items(secondGroupItems => {
+                        secondGroupItems.AddSimpleFor(m => m.Status)
+                            .Editor(e => e
+                                .SelectBox()
+                                .DataSource(new[] {
+                                        "entsorgt", "intern", "verkauft"
+                                    }
+                                )
+                            );
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff).Label(l => l.Text("Fahrzeugführer"));
+                        secondGroupItems.AddSimpleFor(m => m.Kraftstoff)
+                            .Editor(e => e
+                                .TextBox()
+                                .Mask("+1 (000) 000-0000")
+                            );
+                    });
+
+                    groupItems.AddSimpleFor(m => m.Kraftstoff)
+                        .ColSpan(2)
+                        .Editor(e => e
+                            .TextArea()
+                            .Height(140)
+                        );
+                });
+        })
+        .FormData(Model)
+    )
+</div>
 

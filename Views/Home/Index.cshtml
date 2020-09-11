@@ -6,6 +6,9 @@
 <h2>Übersicht</h2>
 
 
+
+
+
 @(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.view_uebersicht>()
          .Editing(e => e.Mode(GridEditMode.Popup)
        .AllowAdding(true)
@@ -24,6 +27,46 @@
 
            .Form(f => f.Items(items =>
            {
+
+
+               items.AddGroup()
+
+            .Caption("Allgemeine Informationen")
+                            .Items(groupItems =>
+                            {
+
+                                groupItems.AddSimple().Template("<div class='form-avatar'></div>" +
+                                    "<br>" +
+                                    ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    );
+                                groupItems.AddGroup().ColSpan(3).Items(secondGroupItems =>
+                                {
+                                    secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                                    secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                                    secondGroupItems.AddSimpleFor(m => m.Kraftstoff)
+                                        .Editor(p => p
+                                            .DateBox()
+                                            .Width("100%")
+                                        )
+                                        .IsRequired(false);
+                                });
+                            });
+
                items.AddGroup()
                    .Caption("Zuordnung")
                    .ColCount(3)
@@ -36,6 +79,8 @@
                        groupItems.AddSimpleFor(m => m.Kraftstoff);
                        groupItems.AddSimpleFor(m => m.Neuwagen);
                        groupItems.AddSimpleFor(m => m.Status);
+                       groupItems.AddSimpleFor(m => m.Fahrzeughalter);
+                       groupItems.AddSimpleFor(m => m.Niederlassung);
                    });
 
                items.AddGroup()
@@ -51,7 +96,23 @@
                       groupItems.AddSimpleFor(m => m.KMDatum);
                       groupItems.AddSimpleFor(m => m.KMStand);
                   });
-
+               items.AddGroup()
+                  .Caption("TestGroup Leasing")
+                  .ColCount(1)
+                  .ColSpan(5)
+                  .Items(groupItems =>
+                  {
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                      groupItems.AddSimpleFor(m => m.Kraftstoff);
+                  });
 
 
 
@@ -74,45 +135,53 @@
         .Width(50);
 
         columns.AddFor(m => m.Kennzeichen)
-        .Width(100);
+        ;
 
         columns.AddFor(m => m.Marke);
 
         columns.AddFor(m => m.Modell);
 
         columns.AddFor(m => m.Fahrzeughalter)
-        .Width(120);
+        ;
 
         columns.AddFor(m => m.Niederlassung)
-        .Width(120);
+        ;
 
         columns.AddFor(m => m.Kraftstoff)
-        .Width(80);
+        .Width(80)
+        .Visible(false);
 
-        columns.AddFor(m => m.Neuwagen);
+        columns.AddFor(m => m.Neuwagen)
+        .Visible(false);
 
-        columns.AddFor(m => m.Status);
+        columns.AddFor(m => m.Status)
+        .Visible(false);
 
         columns.AddFor(m => m.EinkaufId)
         .Visible(false);
 
         columns.AddFor(m => m.ListenpreisB)
-        .Width(100);
+        .Width(100)
+        .Visible(false);
 
         columns.AddFor(m => m.EKPreisB)
-        .Width(80);
+        .Width(80)
+        .Visible(false);
 
         columns.AddFor(m => m.Erstzulassung)
-        .Width(100);
+        
+        .Visible(true);
 
         columns.AddFor(m => m.KMDatum)
-        .Width(80);
+        .Width(80)
+        .Visible(false);
 
         columns.AddFor(m => m.Kaufdatum)
-        .Width(100);
+        .Width(100)
+        .Visible(false);
 
         columns.AddFor(m => m.KMStand)
-        .Width(80);
+        .Width(80)
+        .Visible(false);
     })
-
-    )
+)

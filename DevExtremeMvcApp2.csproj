@@ -155,6 +155,7 @@
     <Content Include="Content\css\devextreme\theme.additional.css" />
     <Content Include="Content\css\devextreme\theme.base.css" />
     <Content Include="Content\css\Site.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\css\vendor.css" />
     <Content Include="Content\dx-diagram.css" />
     <Content Include="Content\dx-diagram.min.css" />
@@ -223,6 +224,7 @@
     <Content Include="Scripts\cldr\supplemental.min.js" />
     <Content Include="Scripts\cldr\unresolved.js" />
     <Content Include="Scripts\cldr\unresolved.min.js" />
+    <Content Include="Scripts\Data\appointments.js" />
     <Content Include="Scripts\dx-diagram.js" />
     <Content Include="Scripts\dx-diagram.min.js" />
     <Content Include="Scripts\dx-gantt.js" />
@@ -314,7 +316,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\View.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +387,8 @@
   <ItemGroup>
     <Content Include="Web.config" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Modelle.cshtml" />
+    <Content Include="Views\Home\_CardViewPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -399,6 +402,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SampleDataController.cs" />
     <Compile Include="Controllers\uebersicht_datenController.cs" />
@@ -449,6 +453,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
