@@ -10,19 +10,58 @@ using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DevExtremeMvcApp2.Controllers {
-    public class HomeController : Controller {
+namespace DevExtremeMvcApp2.Controllers
+{
+    public class HomeController : Controller
+    {
 
         FuhrparkContextEntities context = new FuhrparkContextEntities();
         public ActionResult Index()
         {
 
-          
-           return View();
+
+            return View();
+
+        }
+        public ActionResult Login()
+        {
+
+
+            return View();
 
         }
 
-        
+        [HttpPost]
+        public ActionResult Login(CBUserModel model)
+        {
+            FuhrparkContextEntities1 cbe = new FuhrparkContextEntities1();
+            var s = cbe.GetCBLoginInfo(model.UserName, model.Password);
+
+            var item = s.FirstOrDefault();
+            if (item == "Success")
+            {
+
+                return View("Index");
+            }
+            else if (item == "User Does not Exists")
+
+            {
+                ViewBag.NotValidUser = item;
+
+            }
+            else
+            {
+                ViewBag.Failedcount = item;
+            }
+
+            return View("Login");
+        }
+        public ActionResult UserLandingView()
+        {
+            return View();
+        }
+
+
         public ActionResult Create()
 
         {
@@ -34,19 +73,6 @@ namespace DevExtremeMvcApp2.Controllers {
         {
 
             return View();
-        }
-        public ActionResult GanttPartial()
-        {
-            return PartialView("~/Views/Home/_GanttPartial.cshtml");
-        }
-        public ActionResult GanttBatchUpdate(
-                            )
-        {
-
-
-
-
-            return PartialView("~/Views/Home/_GanttPartial.cshtml");
         }
         public ActionResult Modelle()
 
@@ -128,6 +154,33 @@ namespace DevExtremeMvcApp2.Controllers {
                 }
             }
             return PartialView("_CardViewPartial", model.ToList());
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public ActionResult Gantt2Partial()
+        {
+            return PartialView("_Gantt2Partial");
+        }
+        public ActionResult Gantt2BatchUpdate(
+                            )
+        {
+
+
+
+
+            return PartialView("_Gantt2Partial");
         }
     }
 }

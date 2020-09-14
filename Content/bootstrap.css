@@ -10270,6 +10270,10 @@ a.text-dark:hover, a.text-dark:focus {
   .table-dark tbody + tbody {
     border-color: #dee2e6;
   }
+  .uebersicht_design {
+    background-color:aqua;
+    }
+  background-color
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6;

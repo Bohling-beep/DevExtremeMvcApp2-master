@@ -8509,10 +8509,10 @@
   padding: 10px 35px 10px 10px;
 }
 .dx-datagrid .dx-row > td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 13px;
-  line-height: 16px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 15px;
+  line-height: 20px;
 }
 .dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row > td,
 .dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row > td.dx-cell-modified:not(.dx-field-item-content),

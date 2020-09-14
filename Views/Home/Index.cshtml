@@ -1,47 +1,124 @@
 @model IEnumerable<DevExtremeMvcApp2.Models.GetIndexUebersicht_Result>
 
+
 @{ ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<h2>Übersicht</h2>
+<h2>Angelegte Fahrzeuge</h2>
+
+<style>
+    div.fixed {
+        font-family: "Impact", serif;
+     
+        font-size : 400%;
+        margin-left: 400px;
+        
+    }
+    div.test4 {
+        margin-top: 60px;
+        float: left;
+
+      
+        
+     
+    }
+
+    div.test5 {
+        border: 3px solid orange;
+    }
+    
+</style>
 
 
 
 
 
-@(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.view_uebersicht>()
+<div class="test5">
+    <div class="test4">
+
+
+
+        @Html.DevExpress().TreeView(
+         settings =>
+         {
+             settings.Name = "treeView";
+
+             settings.Width = 300;
+             settings.AllowCheckNodes = true;
+
+             var node = settings.Nodes.Add("SKODA");
+             var subNode = node.Nodes.Add("Modell1");
+             node.Nodes.Add("Modell2");
+             node.Nodes.Add("Modell3");
+
+             node = settings.Nodes.Add("BMW");
+             node.Nodes.Add("Modell1");
+             node.Nodes.Add("Modell2");
+             node.Nodes.Add("Modell3");
+
+             node = settings.Nodes.Add("Mercedes");
+             node.Nodes.Add("Modell1");
+             node.Nodes.Add("Modell2");
+             node.Nodes.Add("Modell3");
+
+             node = settings.Nodes.Add("Volkswagen");
+             node.Nodes.Add("Modell1");
+             node.Nodes.Add("Modell2");
+             node.Nodes.Add("Modell3");
+
+             settings.PreRender = (source, e) =>
+             {
+                 ASPxTreeView treeView = (ASPxTreeView)source;
+                 treeView.ExpandToDepth(0);
+             };
+         }).GetHtml();
+
+
+    
+
+
+
+
+        </div>
+    
+        <div class="fixed">
+
+
+
+
+
+
+
+        @(Html.DevExtreme().DataGrid<DevExtremeMvcApp2.Models.uebersicht_daten>()
          .Editing(e => e.Mode(GridEditMode.Popup)
-       .AllowAdding(true)
-       .AllowDeleting(true)
-       .AllowUpdating(true)
-       .Popup(p => p
-               .Title("Edit")
-               .Width("100%")
-               .Height("100%")
-               .Position(pos => pos
-                   //.My(HorizontalAlignment.Center, VerticalAlignment.Center)
-                   //.At(HorizontalAlignment.Center, VerticalAlignment.Center)
-                   .Of(new JS("window"))
+           .AllowAdding(true)
+           .AllowDeleting(true)
+           .AllowUpdating(true)
+           .Popup(p => p
+                   .Title("Edit")
+                   .Width("100%")
+                   .Height("100%")
+                   .Position(pos => pos
+                       //.My(HorizontalAlignment.Center, VerticalAlignment.Center)
+                       //.At(HorizontalAlignment.Center, VerticalAlignment.Center)
+                       .Of(new JS("window"))
                    )
            )
 
            .Form(f => f.Items(items =>
-           {
+
+               {
 
 
-               items.AddGroup()
+                items.AddGroup()
 
-            .Caption("Allgemeine Informationen")
-                            .Items(groupItems =>
-                            {
+         .Caption("Allgemeine Informationen")
+                         .Items(groupItems =>
+                         {
 
-                                groupItems.AddSimple().Template("<div class='form-avatar'></div>" +
-                                    "<br>" +
-                                    ""
-
-
-
-
+                             groupItems.AddSimple().Template("<div class='form-avatar'></div>" +
+                                 "<br>"
+                                     // "<img src=' <%= Url.Content('~/Content/Images/skoda.png') %> width='20' '/>"
 
 
 
@@ -53,83 +130,107 @@
 
 
 
-                                    );
-                                groupItems.AddGroup().ColSpan(3).Items(secondGroupItems =>
-                                {
-                                    secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
-                                    secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
-                                    secondGroupItems.AddSimpleFor(m => m.Kraftstoff)
-                                        .Editor(p => p
-                                            .DateBox()
-                                            .Width("100%")
-                                        )
-                                        .IsRequired(false);
-                                });
-                            });
 
-               items.AddGroup()
-                   .Caption("Zuordnung")
-                   .ColCount(3)
-                   .ColSpan(3)
-                   .Items(groupItems =>
-                   {
-                       groupItems.AddSimpleFor(m => m.Kennzeichen);
-                       groupItems.AddSimpleFor(m => m.Marke);
-                       groupItems.AddSimpleFor(m => m.Modell);
-                       groupItems.AddSimpleFor(m => m.Kraftstoff);
-                       groupItems.AddSimpleFor(m => m.Neuwagen);
-                       groupItems.AddSimpleFor(m => m.Status);
-                       groupItems.AddSimpleFor(m => m.Fahrzeughalter);
-                       groupItems.AddSimpleFor(m => m.Niederlassung);
-                   });
 
-               items.AddGroup()
-                  .Caption("Fahrzeug Einkauf")
-                  .ColCount(2)
-                  .ColSpan(5)
-                  .Items(groupItems =>
-                  {
-                      groupItems.AddSimpleFor(m => m.ListenpreisB);
-                      groupItems.AddSimpleFor(m => m.EKPreisB);
-                      groupItems.AddSimpleFor(m => m.Erstzulassung);
-                      groupItems.AddSimpleFor(m => m.Kaufdatum);
-                      groupItems.AddSimpleFor(m => m.KMDatum);
-                      groupItems.AddSimpleFor(m => m.KMStand);
+
+
+
+
+
+
+
+                                     );
+                             groupItems.AddGroup().ColSpan(3).Items(secondGroupItems =>
+                             {
+                                 secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                                 secondGroupItems.AddSimpleFor(m => m.Kraftstoff);
+                                 secondGroupItems.AddSimpleFor(m => m.Kraftstoff)
+                                     .Editor(p => p
+                                         .DateBox()
+                                         .Width("100%")
+                                     )
+                                     .IsRequired(false);
+                             });
+                         });
+
+                items.AddGroup()
+                .Caption("Zuordnung")
+                .ColCount(3)
+                .ColSpan(3)
+                .Items(groupItems =>
+                {
+                    groupItems.AddSimpleFor(m => m.Kennzeichen);
+                    groupItems.AddSimpleFor(m => m.Marke);
+                    groupItems.AddSimpleFor(m => m.Modell);
+                    groupItems.AddSimpleFor(m => m.Kraftstoff);
+                    groupItems.AddSimpleFor(m => m.Neuwagen);
+                    groupItems.AddSimpleFor(m => m.Status);
+                    groupItems.AddSimpleFor(m => m.Fahrzeughalter);
+                    groupItems.AddSimpleFor(m => m.Niederlassung);
+                });
+
+                items.AddGroup()
+               .Caption("Fahrzeug Einkauf")
+               .ColCount(2)
+               .ColSpan(5)
+               .Items(groupItems =>
+               {
+                      //groupItems.AddSimpleFor(m => m.ListenpreisB);
+                      // groupItems.AddSimpleFor(m => m.EKPreisB);
+                      //groupItems.AddSimpleFor(m => m.Erstzulassung);
+                      //groupItems.AddSimpleFor(m => m.Kaufdatum);
+                      //groupItems.AddSimpleFor(m => m.KMDatum);
+                      //groupItems.AddSimpleFor(m => m.KMStand);
                   });
-               items.AddGroup()
-                  .Caption("TestGroup Leasing")
-                  .ColCount(1)
-                  .ColSpan(5)
-                  .Items(groupItems =>
-                  {
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                      groupItems.AddSimpleFor(m => m.Kraftstoff);
-                  });
+                items.AddGroup()
+               .Caption("Daten Leasing")
+               .ColCount(1)
+               .ColSpan(5)
+               .Items(groupItems =>
+               {
+                   groupItems.AddSimpleFor(m => m.Kraftstoff)
+
+                   ;
+
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+                   groupItems.AddSimpleFor(m => m.Kraftstoff);
+               });
 
 
 
 
 
-           }))
+            }))
     )
     .DataSource(ds => ds.WebApi()
-        .RouteName("uebersicht_datenneuApi")
-        .LoadAction("Get")
-        .InsertAction("Post")
-        .UpdateAction("Put")
-        .DeleteAction("Delete")
-        .Key("Id")
-    )
+            .RouteName("uebersicht_daten1Api")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id")
+        )
     .RemoteOperations(true)
-    .Columns(columns => {
+        .Columns(columns => {
+
+                columns.AddFor(m => m.Photo)
+            .Width(100)
+                .AllowFiltering(false)
+                .AllowSorting(false)
+                .CellTemplate(@<text>
+                <div>
+                    <img src="~/content/images/skoda.png" width="100"alt=""/>
+                </div>
+            </text>);
+
+
 
         columns.AddFor(m => m.Id)
         .Width(50);
@@ -157,19 +258,19 @@
         columns.AddFor(m => m.Status)
         .Visible(false);
 
-        columns.AddFor(m => m.EinkaufId)
-        .Visible(false);
+        //columns.AddFor(m => m.EinkaufId)
+        //.Visible(false);
 
-        columns.AddFor(m => m.ListenpreisB)
-        .Width(100)
-        .Visible(false);
+        //columns.AddFor(m => m.ListenpreisB)
+        //.Width(100)
+        //.Visible(false);
 
-        columns.AddFor(m => m.EKPreisB)
-        .Width(80)
+        //columns.AddFor(m => m.EKPreisB)
+        /*.Width(80)
         .Visible(false);
 
         columns.AddFor(m => m.Erstzulassung)
-        
+
         .Visible(true);
 
         columns.AddFor(m => m.KMDatum)
@@ -182,6 +283,9 @@
 
         columns.AddFor(m => m.KMStand)
         .Width(80)
-        .Visible(false);
+        .Visible(false); */
     })
 )
+    </div>
+
+</div>

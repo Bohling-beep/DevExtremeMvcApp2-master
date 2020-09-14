@@ -44,6 +44,7 @@
           <Property Name="Kraftstoff" Type="nchar" MaxLength="10" />
           <Property Name="Neuwagen" Type="bit" />
           <Property Name="Status" Type="ntext" />
+          <Property Name="Photo" Type="varchar(max)" />
         </EntityType>
         <!--Während der Generierung sind Fehler aufgetreten:
 Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
@@ -128,6 +129,7 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
           <Property Name="Kraftstoff" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Neuwagen" Type="Boolean" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="FuhrparkContextEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" />
@@ -220,6 +222,7 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
           <EntitySetMapping Name="uebersicht_daten">
             <EntityTypeMapping TypeName="FuhrparkContextModel.uebersicht_daten">
               <MappingFragment StoreEntitySet="uebersicht_daten">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Kennzeichen" ColumnName="Kennzeichen" />
                 <ScalarProperty Name="Marke" ColumnName="Marke" />

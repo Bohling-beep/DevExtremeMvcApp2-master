@@ -21,13 +21,16 @@
     @Html.DevExpress().GetStyleSheets(
         new StyleSheet { ExtensionSuite = ExtensionSuite.CardView },
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Gantt }
     )
     @Html.DevExpress().GetScripts(
         new Script { ExtensionSuite = ExtensionSuite.CardView },
         new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
-        new Script { ExtensionSuite = ExtensionSuite.Editors }
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
+        new Script { ExtensionSuite = ExtensionSuite.Gantt }
     )
+
 
 
 
@@ -41,10 +44,15 @@
 
 
 
-<body style="padding-top: 5rem;">
+<body style="padding-top: 5rem;" class="dx-viewport">
+
+
+
 
     <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
+        <a class="navbar-brand" href="/"><img src="~/Content/images/mt-logo.png" width="200" alt="logo" /></a>
         <a class="navbar-brand" href="/">FuhrparkProto</a>
+        
 
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="navbar-toggler-icon"></span>
@@ -52,18 +60,25 @@
 
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="active nav-item"><a href="#" class="nav-link">Übersicht</a></li>
-                <li class="nav-item"><a href="home/about" class="nav-link">Termine</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link"></a></li>
-                <li class="nav-item"><a href="home/modelle" class="nav-link">Fahrzeug Modelle</a></li>
+                <li class="active nav-item"><a href="/home/Index" class="nav-link">Übersicht</a></li>
+                <li class="nav-item"><a href="about" class="nav-link">Termine</a></li>
+                <li class="nav-item"><a href="modelle" class="nav-link">Fahrzeug Modelle</a></li>
+                <li class="nav-item"><a href="reifen" class="nav-link">Verwaltung Reifen</a></li>
             </ul>
         </div>
     </nav>
+    <br />
 
-    <main role="main" class="container">
+
+
+
+
+ 
+
+    <main role="main" >
 
         @RenderBody()
-    </main> 
+    </main>
 </body>
 
 </html>

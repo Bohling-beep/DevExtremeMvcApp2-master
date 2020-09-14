@@ -1,0 +1,21 @@
+@Html.DevExpress().Gantt(settings =>
+{
+    settings.Name = "Gantt2";
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "Gantt2Partial" };
+        settings.BatchUpdateRouteValues = new { Controller = "Home", Action = "Gantt2BatchUpdate" };
+
+    settings.SettingsEditing.Enabled = true;
+    settings.SettingsValidation.EnableDependencyValidation = true;
+    settings.SettingsValidation.AutoUpdateParentTasks = true;
+
+    settings.SettingsToolbar.Visible = true;
+    settings.SettingsGanttView.ShowResources = true;
+    settings.SettingsGanttView.ViewType = GanttViewType.Days;
+    //settings.SettingsGanttView.TaskTitlePosition = GanttTaskTitlePosition.Inside;
+
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Height = System.Web.UI.WebControls.Unit.Pixel(500);
+
+
+
+    }).GetHtml()

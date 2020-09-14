@@ -21,7 +21,7 @@ namespace DevExtremeMvcApp2 {
             styleBundle.Include("~/Content/dx.common.css");
 
             // Predefined themes: https://js.devexpress.com/DevExtreme/Guide/Themes_and_Styles/Predefined_Themes/
-            styleBundle.Include("~/Content/dx.light.css");
+            styleBundle.Include("~/Content/dx.material.orange.light.compact.css");
 
             // Uncomment to use the Gantt control
             //scriptBundle.Include("~/Scripts/dx-gantt.js");
@@ -34,15 +34,15 @@ namespace DevExtremeMvcApp2 {
 
             // Uncomment to use Globalize for localization
             // Docs: https://docs.devexpress.com/DevExtremeAspNetMvc/400706#globalize
-            //scriptBundle.Include("~/Scripts/cldr.js");
-            //scriptBundle.Include("~/Scripts/cldr/event.js");
-            //scriptBundle.Include("~/Scripts/cldr/supplemental.js");
-            //scriptBundle.Include("~/Scripts/cldr/unresolved.js");
-            //scriptBundle.Include("~/Scripts/globalize.js");
-            //scriptBundle.Include("~/Scripts/globalize/message.js");
-            //scriptBundle.Include("~/Scripts/globalize/number.js");
-            //scriptBundle.Include("~/Scripts/globalize/currency.js");
-            //scriptBundle.Include("~/Scripts/globalize/date.js");
+            scriptBundle.Include("~/Scripts/cldr.js");
+            scriptBundle.Include("~/Scripts/cldr/event.js");
+            scriptBundle.Include("~/Scripts/cldr/supplemental.js");
+            scriptBundle.Include("~/Scripts/cldr/unresolved.js");
+            scriptBundle.Include("~/Scripts/globalize.js");
+            scriptBundle.Include("~/Scripts/globalize/message.js");
+            scriptBundle.Include("~/Scripts/globalize/number.js");
+            scriptBundle.Include("~/Scripts/globalize/currency.js");
+            scriptBundle.Include("~/Scripts/globalize/date.js");
 
             // Uncomment to enable client-side export
             //scriptBundle.Include("~/Scripts/jszip.js");

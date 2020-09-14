@@ -44,7 +44,8 @@ namespace DevExtremeMvcApp2.Controllers
                 i.Erstzulassung,
                 i.KMDatum,
                 i.Kaufdatum,
-                i.KMStand
+                i.KMStand,
+               
             });
 
             // If you work with a large amount of data, consider specifying the PaginateViaPrimaryKey and PrimaryKey properties.
@@ -80,6 +81,7 @@ namespace DevExtremeMvcApp2.Controllers
             string KMDATUM = nameof(view_uebersicht.KMDatum);
             string KAUFDATUM = nameof(view_uebersicht.Kaufdatum);
             string KMSTAND = nameof(view_uebersicht.KMStand);
+           
 
 
 
@@ -157,6 +159,7 @@ namespace DevExtremeMvcApp2.Controllers
             string KRAFTSTOFF = nameof(uebersicht_daten.Kraftstoff);
             string NEUWAGEN = nameof(uebersicht_daten.Neuwagen);
             string STATUS = nameof(uebersicht_daten.Status);
+            
 
             if (values.Contains(ID))
             {
@@ -202,6 +205,7 @@ namespace DevExtremeMvcApp2.Controllers
             {
                 model.Status = Convert.ToString(values[STATUS]);
             }
+
         }
 
 

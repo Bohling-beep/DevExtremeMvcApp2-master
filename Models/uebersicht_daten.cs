@@ -23,5 +23,6 @@ namespace DevExtremeMvcApp2.Models
         public string Kraftstoff { get; set; }
         public Nullable<bool> Neuwagen { get; set; }
         public string Status { get; set; }
+        public string Photo { get; set; }
     }
 }
