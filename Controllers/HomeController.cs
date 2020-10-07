@@ -156,31 +156,45 @@ namespace DevExtremeMvcApp2.Controllers
             return PartialView("_CardViewPartial", model.ToList());
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public ActionResult Gantt2Partial()
+       
+        public partial class UICustomizationController : Controller
         {
-            return PartialView("_Gantt2Partial");
+            public ActionResult Columns()
+            {
+                return View("Columns");
+            }
+            public ActionResult ColumnsPartial()
+            {
+                return PartialView("ColumnsPartial");
+            }
         }
-        public ActionResult Gantt2BatchUpdate(
-                            )
+
+        public ActionResult GanttPartial()
         {
+            return PartialView("_GanttPartial");
+        }
+        public ActionResult GanttBatchUpdate(
+            MVCxGanttTaskUpdateValues<DevExtremeMvcApp2.Models.Termine, string> taskUpdateValues
+            )
+        {
+            foreach (var item in taskUpdateValues.Update)
+            {
+                // Task update logic
+            }
+            foreach (var itemKey in taskUpdateValues.DeleteKeys)
+            {
+                // Task delete logic
+            }
+            foreach (var item in taskUpdateValues.Insert)
+            {
+                // Task insert logic
+            }
 
 
 
 
-            return PartialView("_Gantt2Partial");
+            return PartialView("_GanttPartial");
         }
     }
 }
+

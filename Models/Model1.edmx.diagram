@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="FuhrparkContextModel.Status" Width="1.5" PointX="3.75" PointY="5.125" />
         <EntityTypeShape EntityType="FuhrparkContextModel.Fahrzeugeinkauf" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="FuhrparkContextModel.view_uebersicht" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FuhrparkContextModel.Termine" Width="1.5" PointX="6.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

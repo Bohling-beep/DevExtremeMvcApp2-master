@@ -32,6 +32,7 @@ namespace DevExtremeMvcApp2.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Fahrzeugeinkauf> Fahrzeugeinkauf { get; set; }
         public virtual DbSet<view_uebersicht> view_uebersicht { get; set; }
+        public virtual DbSet<Termine> Termine { get; set; }
     
         public virtual ObjectResult<GetIndexUebersicht_Result> GetIndexUebersicht()
         {

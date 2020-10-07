@@ -31,6 +31,16 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Status" Type="ntext" />
         </EntityType>
+        <EntityType Name="Termine">
+          <Key>
+            <PropertyRef Name="EreignisID" />
+          </Key>
+          <Property Name="EreignisID" Type="int" Nullable="false" />
+          <Property Name="Titel" Type="nchar" MaxLength="10" />
+          <Property Name="Start" Type="nchar" MaxLength="10" />
+          <Property Name="Ende" Type="nchar" MaxLength="10" />
+          <Property Name="Farbe" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="uebersicht_daten">
           <Key>
             <PropertyRef Name="Id" />
@@ -44,7 +54,7 @@
           <Property Name="Kraftstoff" Type="nchar" MaxLength="10" />
           <Property Name="Neuwagen" Type="bit" />
           <Property Name="Status" Type="ntext" />
-          <Property Name="Photo" Type="varchar(max)" />
+          <Property Name="Photo" Type="nvarchar(max)" />
         </EntityType>
         <!--Während der Generierung sind Fehler aufgetreten:
 Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein Primärschlüssel definiert. Der Schlüssel wurde abgeleitet, und die Definition wurde als schreibgeschützte Tabelle/Sicht erstellt.-->
@@ -90,6 +100,7 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
           <EntitySet Name="Fahrzeugeinkauf" EntityType="Self.Fahrzeugeinkauf" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kraftstoff" EntityType="Self.Kraftstoff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Termine" EntityType="Self.Termine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="view_uebersicht" EntityType="Self.view_uebersicht" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -129,7 +140,7 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
           <Property Name="Kraftstoff" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Neuwagen" Type="Boolean" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="FuhrparkContextEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="uebersicht_daten" EntityType="Self.uebersicht_daten" />
@@ -154,6 +165,7 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
           <EntitySet Name="Status" EntityType="FuhrparkContextModel.Status" />
           <EntitySet Name="Fahrzeugeinkauf" EntityType="FuhrparkContextModel.Fahrzeugeinkauf" />
           <EntitySet Name="view_uebersicht" EntityType="FuhrparkContextModel.view_uebersicht" />
+          <EntitySet Name="Termine" EntityType="FuhrparkContextModel.Termine" />
         </EntityContainer>
         <ComplexType Name="GetIndexUebersicht_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -212,6 +224,16 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
           <Property Name="KMDatum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="Kaufdatum" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="KMStand" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Termine">
+          <Key>
+            <PropertyRef Name="EreignisID" />
+          </Key>
+          <Property Name="EreignisID" Type="Int32" Nullable="false" />
+          <Property Name="Titel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Start" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Ende" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Farbe" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -299,6 +321,17 @@ Warnung 6002: Für Tabelle/Sicht 'FuhrparkContext.dbo.view_uebersicht' ist kein 
                 <ScalarProperty Name="Marke" ColumnName="Marke" />
                 <ScalarProperty Name="Kennzeichen" ColumnName="Kennzeichen" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Termine">
+            <EntityTypeMapping TypeName="FuhrparkContextModel.Termine">
+              <MappingFragment StoreEntitySet="Termine">
+                <ScalarProperty Name="Farbe" ColumnName="Farbe" />
+                <ScalarProperty Name="Ende" ColumnName="Ende" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="EreignisID" ColumnName="EreignisID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,27 @@
+@using DevExtremeMvcApp2.Models
+
+@Html.DevExpress().Gantt(settings =>
+{
+    settings.Name = "Gantt";
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "GanttPartial" };
+    settings.BatchUpdateRouteValues = new { Controller = "Home", Action = "GanttBatchUpdate" };
+
+    settings.SettingsEditing.Enabled = true;
+    settings.SettingsValidation.EnableDependencyValidation = false;
+    settings.SettingsValidation.AutoUpdateParentTasks = false;
+
+    settings.SettingsToolbar.Visible = true;
+    settings.SettingsGanttView.ShowResources = true;
+    settings.SettingsGanttView.ViewType = GanttViewType.Days;
+    settings.SettingsGanttView.TaskTitlePosition = DevExpress.Web.ASPxGantt.GanttTaskTitlePosition.Inside;
+
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Height = System.Web.UI.WebControls.Unit.Pixel(500);
+
+    settings.Mappings.Task.Key = "EreignisID";
+    settings.Mappings.Task.Title = "Titel";
+    settings.Mappings.Task.Start = "Start";
+    settings.Mappings.Task.End = "Ende";
+
+
+}).Bind(, Model).GetHtml()

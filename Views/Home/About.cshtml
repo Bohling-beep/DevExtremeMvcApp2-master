@@ -7,8 +7,15 @@
 
 
 
+
+
 @using (Html.BeginForm())
 {
-    @Html.Action("Gantt2Partial")
+    @Html.Partial("ColumnsPartial")
 }
 
+
+@using (Html.BeginForm())
+{
+    @Html.Action("GanttPartial")
+}

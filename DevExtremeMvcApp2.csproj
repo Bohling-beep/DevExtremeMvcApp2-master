@@ -107,6 +107,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -421,7 +422,8 @@
     <Content Include="Views\Home\_CardViewPartial.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\_empty.cshtml" />
-    <Content Include="Views\Home\_Gantt2Partial.cshtml" />
+    <Content Include="Views\Home\ColumnsPartial.cshtml" />
+    <Content Include="Views\Home\_GanttPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -435,7 +437,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\UICostomization.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SampleDataController.cs" />
     <Compile Include="Controllers\uebersicht_daten1Controller.cs" />
@@ -445,6 +447,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AirlineDataProvider.cs" />
     <Compile Include="Models\CBUserModel.cs" />
     <Compile Include="Models\Fahrzeugeinkauf.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -488,6 +491,9 @@
     <Compile Include="Models\SampleData.cs" />
     <Compile Include="Models\SampleOrder.cs" />
     <Compile Include="Models\Status.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Termine.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TreeViewOptions.cs" />
@@ -536,7 +542,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties TemplateFeatures="NET CS" DismissedDevExtremeVersion="20.1.7.0" />
+      <UserProperties DismissedDevExtremeVersion="20.1.7.0" TemplateFeatures="NET CS" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

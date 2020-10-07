@@ -130,7 +130,7 @@ namespace DevExtremeMvcApp2.Controllers
         }
 
         [HttpDelete]
-        public async Task Delete(FormDataCollection form) {
+        public async System.Threading.Tasks.Task Delete(FormDataCollection form) {
             var key = Convert.ToInt32(form.Get("key"));
             var model = await _context.view_uebersicht.FirstOrDefaultAsync(item => item.Id == key);
 

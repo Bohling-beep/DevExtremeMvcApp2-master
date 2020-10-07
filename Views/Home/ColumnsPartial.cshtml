@@ -1,0 +1,49 @@
+﻿@using DevExtremeMvcApp2.Models
+@using System.Web.UI.WebControls
+
+
+@Html.DevExpress().Gantt(settings =>
+{
+    settings.Name = "gantt";
+    settings.CallbackRouteValues = new { Controller = "UICustomization", Action = "ColumnsPartial" };
+
+    
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+
+    settings.SettingsGanttView.ViewType = GanttViewType.Hours;
+    settings.SettingsEditing.Enabled = true;
+    settings.SettingsToolbar.Visible = true;
+    settings.SettingsValidation.AutoUpdateParentTasks = true;
+
+    settings.SettingsTaskList.Width = Unit.Percentage(55);
+
+    settings.SettingsTaskList.Columns.Add(new GanttTextColumn() { FieldName = "DepartFrom" });
+    settings.SettingsTaskList.Columns.Add(new GanttTimeEditColumn() { FieldName = "FlightStart", Caption = "Depart At", Width = System.Web.UI.WebControls.Unit.Pixel(70) });
+    settings.SettingsTaskList.Columns.Add(new GanttTextColumn() { FieldName = "ArriveTo" });
+    settings.SettingsTaskList.Columns.Add(new GanttTimeEditColumn() { FieldName = "FlightEnd", Caption = "Arrive At", Width = System.Web.UI.WebControls.Unit.Pixel(70) });
+    settings.SettingsTaskList.Columns.Add(new GanttCheckColumn() { FieldName = "International", Width = System.Web.UI.WebControls.Unit.Pixel(60) });
+    settings.SettingsTaskList.Columns.Add(new GanttProgressBarColumn() { FieldName = "Progress", Width = System.Web.UI.WebControls.Unit.Pixel(80) });
+    settings.SettingsTaskList.Columns.Add(new GanttTextColumn() { FieldName = "Miles", Width = System.Web.UI.WebControls.Unit.Pixel(50) });
+
+    settings.Mappings.Task.Key = "FligntNumber";
+    settings.Mappings.Task.ParentKey = "CompositeFLightNumber";
+    settings.Mappings.Task.Title = "Title";
+    settings.Mappings.Task.Start = "FlightStart";
+    settings.Mappings.Task.End = "FlightEnd";
+    settings.Mappings.Task.Color = "State";
+
+    settings.Mappings.Dependency.DependencyType = "Type";
+    settings.Mappings.Dependency.PredecessorKey = "PrevFlightId";
+    settings.Mappings.Dependency.SuccessorKey = "NexFlightId";
+
+    settings.Mappings.Resource.Key = "SideNumber";
+    settings.Mappings.Resource.Name = "Title";
+
+    settings.Mappings.ResourceAssignment.Key = "ID";
+    settings.Mappings.ResourceAssignment.TaskKey = "FigntID";
+    settings.Mappings.ResourceAssignment.ResourceKey = "PlaneID";
+
+    settings.SettingsStripLine.StripLines.Add(new StripLine() { Start = DateTime.Now });
+
+}).Bind(DevExtremeMvcApp2.Models.AirlineDataProvider.Flights, DevExtremeMvcApp2.Models.AirlineDataProvider.Dependencies, DevExtremeMvcApp2.Models.AirlineDataProvider.Planes, DevExtremeMvcApp2.Models.AirlineDataProvider.Assignments).GetHtml()
+
