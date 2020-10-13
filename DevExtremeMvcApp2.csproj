@@ -342,7 +342,6 @@
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Views\Home\images\alpacana.png" />
     <Content Include="Views\Home\images\mt-logo.png" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -424,6 +423,7 @@
     <Content Include="Views\Shared\_empty.cshtml" />
     <Content Include="Views\Home\ColumnsPartial.cshtml" />
     <Content Include="Views\Home\_GanttPartial.cshtml" />
+    <Content Include="Views\Home\_GanttPartial2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -542,7 +542,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties DismissedDevExtremeVersion="20.1.7.0" TemplateFeatures="NET CS" />
+      <UserProperties TemplateFeatures="NET CS" DismissedDevExtremeVersion="20.1.7.0" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

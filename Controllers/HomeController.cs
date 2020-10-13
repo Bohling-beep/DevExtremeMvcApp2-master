@@ -173,27 +173,19 @@ namespace DevExtremeMvcApp2.Controllers
         {
             return PartialView("_GanttPartial");
         }
-        public ActionResult GanttBatchUpdate(
-            MVCxGanttTaskUpdateValues<DevExtremeMvcApp2.Models.Termine, string> taskUpdateValues
-            )
+
+
+        public ActionResult GanttPartial2()
         {
-            foreach (var item in taskUpdateValues.Update)
-            {
-                // Task update logic
-            }
-            foreach (var itemKey in taskUpdateValues.DeleteKeys)
-            {
-                // Task delete logic
-            }
-            foreach (var item in taskUpdateValues.Insert)
-            {
-                // Task insert logic
-            }
+            return PartialView("_GanttPartial2");
+        }
+        public ActionResult GanttBatchUpdate()
+        {
 
 
 
 
-            return PartialView("_GanttPartial");
+            return PartialView("_GanttPartial2");
         }
     }
 }

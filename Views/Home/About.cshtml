@@ -1,21 +1,48 @@
-﻿@{
-    ViewData["Title"] = "About";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titel</title>
+</head>
+<body>
 
-<h2>Termine</h2>
 
 
+
+
+
+
+
+    <select id="Select1">
+        <option>test</option>
+
+    </select>
+
+
+
+    test123
+
+
+    <hr />
+
+    <div></div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
 
 
 
 @using (Html.BeginForm())
 {
-    @Html.Partial("ColumnsPartial")
-}
-
-
-@using (Html.BeginForm())
-{
-    @Html.Action("GanttPartial")
+    @Html.Action("GanttPartial2")
 }
