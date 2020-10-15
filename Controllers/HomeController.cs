@@ -68,11 +68,16 @@ namespace DevExtremeMvcApp2.Controllers
 
             return View();
         }
-        public ActionResult about()
+
+
+        public ActionResult About()
 
         {
-
-            return View();
+            using (var dbContext = new Models.TermineContext())
+            {
+                return View(dbContext.Termine.ToList());
+            }
+          
         }
         public ActionResult Modelle()
 
@@ -156,7 +161,7 @@ namespace DevExtremeMvcApp2.Controllers
             return PartialView("_CardViewPartial", model.ToList());
         }
 
-       
+
         public partial class UICustomizationController : Controller
         {
             public ActionResult Columns()
@@ -169,23 +174,37 @@ namespace DevExtremeMvcApp2.Controllers
             }
         }
 
-        public ActionResult GanttPartial()
+
+
+
+        public ActionResult Gantt1Partial()
         {
-            return PartialView("_GanttPartial");
+            using (var dbContext = new Models.TermineContext())
+            {
+                return PartialView("_Gantt1Partial", dbContext.Termine.ToList());
+            }
+           
         }
-
-
-        public ActionResult GanttPartial2()
+        public ActionResult Gantt1BatchUpdate(
+            MVCxGanttTaskUpdateValues<DevExtremeMvcApp2.Models.Termine, string> taskUpdateValues)
         {
-            return PartialView("_GanttPartial2");
-        }
-        public ActionResult GanttBatchUpdate()
-        {
+            foreach (var item in taskUpdateValues.Update)
+            {
+                // Task update logic
+            }
+            foreach (var itemKey in taskUpdateValues.DeleteKeys)
+            {
+                // Task delete logic
+            }
+            foreach (var item in taskUpdateValues.Insert)
+            {
+                // Task insert logic
+            }
 
 
 
 
-            return PartialView("_GanttPartial2");
+            return PartialView("_Gantt1Partial");
         }
     }
 }

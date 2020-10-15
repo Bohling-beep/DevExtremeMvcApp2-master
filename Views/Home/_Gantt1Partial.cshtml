@@ -1,0 +1,97 @@
+@Html.DevExpress().Gantt(settings =>
+{
+    settings.CustomDataActionRouteValues = "TerminesApi";
+    settings.Name = "Gantt1";
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "Gantt1Partial" };
+    settings.BatchUpdateRouteValues = new { Controller = "Home", Action = "Gantt1BatchUpdate" };
+
+    settings.SettingsEditing.Enabled = true;
+    settings.SettingsValidation.EnableDependencyValidation = false;
+    settings.SettingsValidation.AutoUpdateParentTasks = false;
+
+    settings.SettingsToolbar.Visible = true;
+    settings.SettingsGanttView.ShowResources = false;
+    settings.SettingsGanttView.ViewType = GanttViewType.Days;
+    settings.SettingsGanttView.TaskTitlePosition = DevExpress.Web.ASPxGantt.GanttTaskTitlePosition.Inside;
+
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Height = System.Web.UI.WebControls.Unit.Pixel(500);
+
+
+    settings.Mappings.Task.Key = "ID";
+    settings.Mappings.Task.Title = "Titel";
+    settings.Mappings.Task.Start = "Start";
+    settings.Mappings.Task.End = "Ende";
+
+
+}
+
+
+
+
+
+).Bind("", "").GetHtml()
+
+
+
+@(Html.DevExtreme().Gantt<DevExtremeMvcApp2.Models.Termine>()
+    
+    .Toolbar (tb=>
+    {
+        tb.Items(i =>
+        {
+            i.Add().Name(GanttToolbarItem.Undo);
+            i.Add().Name(GanttToolbarItem.Redo);
+            i.Add().Name(GanttToolbarItem.Separator);
+            i.Add().Name(GanttToolbarItem.CollapseAll);
+            i.Add().Name(GanttToolbarItem.ExpandAll);
+            i.Add().Name(GanttToolbarItem.Separator);
+            i.Add().Name(GanttToolbarItem.AddTask);
+            i.Add().Name(GanttToolbarItem.DeleteTask);
+            i.Add().Name(GanttToolbarItem.Separator);
+            i.Add().Name(GanttToolbarItem.ZoomIn);
+            i.Add().Name(GanttToolbarItem.ZoomOut);
+        });
+    })
+
+    .Tasks(t => t
+        .DataSource(ds => ds.WebApi()
+            .RouteName("TerminesApi")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("ID"))
+        .KeyExpr("ID")
+        .TitleExpr("Titel")
+
+        .StartExpr("Start")
+        .EndExpr("Ende")
+
+    )
+
+
+
+    .Editing(e => e.Enabled(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.ID);
+        columns.AddFor(m => m.Titel)
+            .Caption("Beschreibung")
+            .Width(300);
+        columns.AddFor(m => m.Start)
+            .Caption("Start Datum");
+        columns.AddFor(m => m.Ende)
+            .Caption("Ende Datum");
+    })
+    .ScaleType(GanttScaleType.Weeks)
+    .TaskListWidth(500)
+)
+@(Html.DevExtreme().Popup()
+    .ID("popup")
+    .Height("auto")
+    .ShowTitle(true)
+    .Title("About")
+    .Visible(false)
+    .DragEnabled(false)
+    .CloseOnOutsideClick(true)
+)
